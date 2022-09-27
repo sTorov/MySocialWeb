@@ -8,7 +8,7 @@
         public string password { get; set; }
         public string email { get; set; }
         public string photo { get; set; }
-        public string fovarite_movie { get; set; }
-        public string fovarite_book { get; set; }
+        public string favorite_movie { get; set; }
+        public string favorite_book { get; set; }
     }
 }
