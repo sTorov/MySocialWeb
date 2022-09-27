@@ -11,6 +11,9 @@
         public string FavoriteMovie { get; set; }
         public string FavoriteBook { get; set; }
 
+        public IEnumerable<Message> IncomingMessages { get; }
+        public IEnumerable<Message> OutgoingMessages { get; }
+
         public User(
             int id,
             string firstname,
@@ -19,7 +22,10 @@
             string email,
             string photo,
             string favoriteMovie,
-            string favoriteBook)
+            string favoriteBook,
+            IEnumerable<Message> incomingMessages,
+            IEnumerable<Message> outgoingMessages
+            )
         {
             Id = id;
             FirstName = firstname;
@@ -29,6 +35,8 @@
             Photo = photo;
             FavoriteMovie = favoriteMovie;
             FavoriteBook = favoriteBook;
+            IncomingMessages = incomingMessages;
+            OutgoingMessages = outgoingMessages;
         }
     }
 }

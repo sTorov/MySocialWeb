@@ -9,10 +9,12 @@ namespace SocialWeb.BLL.Services
     public class UserService
     {
         IUserRepository userRepository;
+        MessageService messageService;
 
         public UserService()
         {
             userRepository = new UserRepository();
+            messageService = new MessageService();
         }
 
         public void Register(UserRegistrationData userRegistrationData)
@@ -66,9 +68,15 @@ namespace SocialWeb.BLL.Services
         public User FindByEmai(string email)
         {
             var findUserEntity = userRepository.FindByEmail(email);
+            if (findUserEntity is null) throw new UserNotFoundException();
 
-            if (findUserEntity is null)
-                throw new UserNotFoundException();
+            return ConstructUserModel(findUserEntity);
+        }
+
+        public User FindById(int id)
+        {
+            var findUserEntity = userRepository.FindById(id);
+            if (findUserEntity is null) throw new UserNotFoundException();
 
             return ConstructUserModel(findUserEntity);
         }
@@ -93,6 +101,9 @@ namespace SocialWeb.BLL.Services
 
         private User ConstructUserModel(UserEntity userEntity)
         {
+            var incomingMessage = messageService.GetIncomingMessagesByUserId(userEntity.id);
+            var outgoingMessages = messageService.GetOutcomingMessagesByUserId(userEntity.id);
+
             return new User(userEntity.id,
                 userEntity.firstname,
                 userEntity.lastname,
@@ -100,7 +111,10 @@ namespace SocialWeb.BLL.Services
                 userEntity.email,
                 userEntity.photo,
                 userEntity.favorite_movie,
-                userEntity.favorite_book);
+                userEntity.favorite_book,
+                incomingMessage,
+                outgoingMessages
+                );
         }
     }
 }
