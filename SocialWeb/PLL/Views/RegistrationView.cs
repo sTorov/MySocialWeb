@@ -1,5 +1,4 @@
-﻿using SocialWeb.BLL.Exceptions;
-using SocialWeb.BLL.Models;
+﻿using SocialWeb.BLL.Models;
 using SocialWeb.BLL.Services;
 using SocialWeb.PLL.Helpers;
 
@@ -18,7 +17,9 @@ namespace SocialWeb.PLL.Views
         {
             var userRegistrationData = new UserRegistrationData();
 
-            Console.WriteLine("Для создания нового профиля введите ваше имя:");
+            Console.WriteLine("Введите данные для регистрации\n");
+
+            Console.Write("Ваша имя: ");
             userRegistrationData.FirstName = Console.ReadLine();
 
             Console.Write("Ваша фамилия: ");

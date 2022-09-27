@@ -10,9 +10,11 @@
             switch (Console.ReadLine())
             {
                 case "1":
+                    Console.Clear();
                     Program.autheticationView.Show();
                     break;
                 case "2":
+                    Console.Clear();
                     Program.registrationView.Show();
                     break;
             }

@@ -6,7 +6,6 @@ namespace SocialWeb.PLL.Views
     {
         public void Show(User user)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Информация о моём профиле");
             Console.WriteLine($"Мой идентификатор: {user.Id}");
             Console.WriteLine($"Меня зовут: {user.FirstName}");
@@ -16,7 +15,9 @@ namespace SocialWeb.PLL.Views
             Console.WriteLine($"Ссылка на моё фото: {user.Photo}");
             Console.WriteLine($"Мой любимый фильм: {user.FavoriteMovie}");
             Console.WriteLine($"Моя любимая книга: {user.FavoriteBook}");
-            Console.ResetColor();
+
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }

@@ -6,18 +6,24 @@ namespace SocialWeb.PLL.Views
     {
         public void Show(IEnumerable<Message> incomingMessages)
         {
-            Console.WriteLine("Входящие сообщения");
+            Console.WriteLine("Входящие сообщения\n");
 
             if(incomingMessages.Count() == 0)
             {
                 Console.WriteLine("Входящих сообщений нет");
+                Console.ReadKey();
+                Console.Clear();
                 return;
             }
 
             incomingMessages.ToList().ForEach(m =>
             {
-                Console.WriteLine($"От кого: {m.SenderEmail}. Текст сообщения: {m.Content}");
+                Console.WriteLine($"От кого: {m.SenderEmail}\nТекст сообщения: {m.Content}");
+                Console.WriteLine("---------------");
             });
+
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }

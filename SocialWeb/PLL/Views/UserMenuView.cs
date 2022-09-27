@@ -34,6 +34,8 @@ namespace SocialWeb.PLL.Views
 
                 string keyValue = Console.ReadLine();
 
+                Console.Clear();
+
                 if (keyValue == "7") 
                     break;
 

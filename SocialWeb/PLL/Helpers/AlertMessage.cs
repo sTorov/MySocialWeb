@@ -8,6 +8,8 @@
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(message);
             Console.ForegroundColor = originalColor;
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }
