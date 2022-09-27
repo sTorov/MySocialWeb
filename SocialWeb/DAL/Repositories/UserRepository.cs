@@ -6,8 +6,8 @@ namespace SocialWeb.DAL.Repositories
     {
         public int Create(UserEntity userEntity)
         {
-            return Execute(@"insert into users (firstname,lastname,password,email)
-                            valies (:firstname,:lastname,:password,:email)", userEntity);
+            return Execute(@"insert into users(firstname,lastname,password,email)
+                            values(:firstname,:lastname,:password,:email)", userEntity);
         }
 
         public int DeleteById(int id)

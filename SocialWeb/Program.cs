@@ -1,31 +1,58 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SocialWeb.BLL.Models;
+using SocialWeb.BLL.Services;
+using System.Text;
 
 namespace SocialWeb
 {
     class Program
     {
+        public static UserService userService = new UserService();
+
         private static void Main(string[] args)
         {
-            string firstName = null;
-            string lastName = null;
-            string password = null;
-            string emailAddress = null;
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.InputEncoding = Encoding.Unicode;
 
-            try
+            Console.WriteLine("Добро пожаловать в социальную сеть");
+            
+            while (true)
             {
-                if (string.IsNullOrEmpty(lastName))
-                    throw new ArgumentNullException();
+                Console.WriteLine("Для регистрации введите имя пользователя:");
 
-                if (password.Length < 8)
-                    throw new ArgumentNullException();
+                string firstname = Console.ReadLine();
 
-                if(!new EmailAddressAttribute().IsValid(emailAddress))
-                    throw new ArgumentNullException();
+                Console.Write("Фамилию: ");
+                string lastname = Console.ReadLine();
 
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine(e.Message);
+                Console.Write("Пароль: ");
+                string password = Console.ReadLine();
+
+                Console.Write("Email: ");
+                string email = Console.ReadLine();
+
+                UserRegistrationData userRegistrationData = new UserRegistrationData()
+                {
+                    FirstName = firstname,
+                    LastName = lastname,
+                    Password = password,
+                    Email = email
+                };
+
+                try
+                {
+                    userService.Register(userRegistrationData);
+                    Console.WriteLine("Регистрация прошла успешно!");
+                }
+                catch (ArgumentNullException)
+                {
+                    Console.WriteLine("Введите корректные значения.");
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Произошла ошибка при регистрации.");
+                }
+
+                Console.ReadKey(true);
             }
         }
     }
