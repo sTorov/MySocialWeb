@@ -10,11 +10,13 @@ namespace SocialWeb.BLL.Services
     {
         IUserRepository userRepository;
         MessageService messageService;
+        FriendService friendService;
 
         public UserService()
         {
             userRepository = new UserRepository();
             messageService = new MessageService();
+            friendService = new FriendService();
         }
 
         public void Register(UserRegistrationData userRegistrationData)
@@ -104,6 +106,8 @@ namespace SocialWeb.BLL.Services
             var incomingMessage = messageService.GetIncomingMessagesByUserId(userEntity.id);
             var outgoingMessages = messageService.GetOutcomingMessagesByUserId(userEntity.id);
 
+            var userFriends = friendService.GetAllFriendsByUserId(userEntity.id);
+
             return new User(userEntity.id,
                 userEntity.firstname,
                 userEntity.lastname,
@@ -113,7 +117,8 @@ namespace SocialWeb.BLL.Services
                 userEntity.favorite_movie,
                 userEntity.favorite_book,
                 incomingMessage,
-                outgoingMessages
+                outgoingMessages,
+                userFriends
                 );
         }
     }

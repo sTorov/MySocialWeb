@@ -8,6 +8,7 @@ namespace SocialWeb
     {
         static UserService userService;
         static MessageService messageService;
+        static FriendService friendService;
         public static MainView mainView;
         public static RegistrationView registrationView;
         public static AutheticationView autheticationView;
@@ -17,6 +18,8 @@ namespace SocialWeb
         public static MessageSendingView messageSendingView;
         public static UserIncomingMessageView userIncomingMessageView;
         public static UserOutcomingMessageView userOutcomingMessageView;
+        public static FriendRequestView friendRequestView;
+        public static UserFriendView userFriendView;
 
         private static void Main(string[] args)
         {
@@ -25,6 +28,7 @@ namespace SocialWeb
 
             userService = new UserService();
             messageService = new MessageService();
+            friendService = new FriendService();
 
             mainView = new MainView();
             registrationView = new RegistrationView(userService);
@@ -35,6 +39,8 @@ namespace SocialWeb
             messageSendingView = new MessageSendingView(userService, messageService);
             userIncomingMessageView = new UserIncomingMessageView();
             userOutcomingMessageView = new UserOutcomingMessageView();
+            friendRequestView = new FriendRequestView(friendService, userService);
+            userFriendView = new UserFriendView();
 
             while (true)
             {
