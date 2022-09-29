@@ -1,4 +1,5 @@
-﻿using SocialWeb.BLL.Models;
+﻿using SocialWeb.BLL.Exceptions;
+using SocialWeb.BLL.Models;
 using SocialWeb.BLL.Services;
 using SocialWeb.PLL.Helpers;
 
@@ -17,23 +18,41 @@ namespace SocialWeb.PLL.Views
 
         public User Show(User user)
         {
+            FriendRequestData friendRequestData = new FriendRequestData(); 
+
             Console.WriteLine("Введите почтовый адрес удаляемого контакта:");
-            string email = Console.ReadLine();
+            friendRequestData.FriendEmail = Console.ReadLine();
 
-            var deletingFriend = user.Friends.FirstOrDefault(f => f.Email == email);
+            friendRequestData.UserId = user.Id;
 
-            if (deletingFriend != null)
+            try
             {
-                friendService.DeleteFriendById(deletingFriend.Id);
-
+                friendService.DeleteFriend(friendRequestData);
+                
                 SuccessMessage.Show("Удаление прошло успешно!");
 
-                user = userService.FindById(user.Id);
+                return userService.FindById(user.Id);
             }
-            else
-                AlertMessage.Show("У вас не такого контакта в друзьях!");
-
-            return user;
+            catch(ArgumentNullException)
+            {
+                AlertMessage.Show("Введите верное значение!");
+                return user;
+            }
+            catch(UserNotFoundException)
+            {
+                AlertMessage.Show("Пользователь не найден!");
+                return user;
+            }
+            catch(EntityNotFoundException)
+            {
+                AlertMessage.Show("Данный пользователь не является вашим другом!");
+                return user;
+            }
+            catch (Exception)
+            {
+                AlertMessage.Show("Произошла ошибка при удалении!");
+                return user;
+            }
         }
     }
 }

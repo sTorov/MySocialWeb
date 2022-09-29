@@ -31,35 +31,54 @@ namespace SocialWeb.BLL.Services
             return friends;
         }
 
-        public void DeleteFriendById(int friendId)
+        public void DeleteFriend(FriendRequestData friendRequestData)
         {
-            friendRepository.Delete(friendId);
+            if (string.IsNullOrEmpty(friendRequestData.FriendEmail))
+                throw new ArgumentNullException();
+
+            if (!new EmailAddressAttribute().IsValid(friendRequestData.FriendEmail))
+                throw new ArgumentNullException();
+
+            var deletingFriendEntity = userRepository.FindByEmail(friendRequestData.FriendEmail);
+            if (deletingFriendEntity is null) throw new UserNotFoundException();
+
+            Delete(friendRequestData.UserId, deletingFriendEntity.id);
+            Delete(deletingFriendEntity.id, friendRequestData.UserId);
+        }
+
+        private void Delete(int userId, int friendId)
+        {
+            var friendEntityForFriend = friendRepository.FindByUserIdAndFriendId(userId, friendId);
+            if (friendEntityForFriend is null) throw new EntityNotFoundException();
+
+            if (friendRepository.Delete(friendEntityForFriend.id) == 0)
+                throw new Exception();
         }
 
         public void SendFriendRequest(FriendRequestData friendRequestData)
         {
-            if (string.IsNullOrEmpty(friendRequestData.RecipientEmail))
+            if (string.IsNullOrEmpty(friendRequestData.FriendEmail))
                 throw new ArgumentNullException();
 
-            if (!new EmailAddressAttribute().IsValid(friendRequestData.RecipientEmail))
+            if (!new EmailAddressAttribute().IsValid(friendRequestData.FriendEmail))
                 throw new ArgumentNullException();
 
-            var findUserEntity = userRepository.FindByEmail(friendRequestData.RecipientEmail);
+            var findUserEntity = userRepository.FindByEmail(friendRequestData.FriendEmail);
             if (findUserEntity is null) throw new UserNotFoundException();
 
-            var friendEntityUser = new FriendEntity()
-            {
-                user_id = friendRequestData.SenderId,
-                friend_id = findUserEntity.id,
-            };
+            Create(friendRequestData.UserId, findUserEntity.id);
+            Create(findUserEntity.id, friendRequestData.UserId);
+        }
 
-            if (friendRepository.Create(friendEntityUser) == 0)
-                throw new Exception();
+        private void Create(int userId, int friendId)
+        {
+            if (friendRepository.FindByUserIdAndFriendId(userId, friendId) != null)
+                throw new ArgumentOutOfRangeException();
 
             var friendEntityFriend = new FriendEntity()
             {
-                user_id = findUserEntity.id,
-                friend_id = friendRequestData.SenderId,
+                user_id = userId,
+                friend_id = friendId,
             };
 
             if (friendRepository.Create(friendEntityFriend) == 0)

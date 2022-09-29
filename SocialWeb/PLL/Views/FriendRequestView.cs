@@ -21,9 +21,9 @@ namespace SocialWeb.PLL.Views
             var friendRequestData = new FriendRequestData();
 
             Console.WriteLine("Введите почтовый адрес вашего нового друга:");
-            friendRequestData.RecipientEmail = Console.ReadLine();
+            friendRequestData.FriendEmail = Console.ReadLine();
 
-            friendRequestData.SenderId = user.Id;
+            friendRequestData.UserId = user.Id;
 
             try
             {
@@ -43,7 +43,12 @@ namespace SocialWeb.PLL.Views
                 AlertMessage.Show("Пользователь не найден!");
                 return user;
             }
-            catch(Exception)
+            catch(ArgumentOutOfRangeException)
+            {
+                AlertMessage.Show("Вы уже добавили данного пользователя в друзья!");
+                return user;
+            }
+            catch (Exception)
             {
                 AlertMessage.Show("Поизошла ошиька при добавлении нового друга!");
                 return user;

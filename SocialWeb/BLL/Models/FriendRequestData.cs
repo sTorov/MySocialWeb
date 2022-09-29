@@ -2,7 +2,7 @@
 {
     public class FriendRequestData
     {
-        public int SenderId { get; set; }
-        public string RecipientEmail { get; set; }
+        public int UserId { get; set; }
+        public string FriendEmail { get; set; }
     }
 }
