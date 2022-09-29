@@ -18,8 +18,11 @@ namespace SocialWeb
         public static MessageSendingView messageSendingView;
         public static UserIncomingMessageView userIncomingMessageView;
         public static UserOutcomingMessageView userOutcomingMessageView;
+
         public static FriendRequestView friendRequestView;
         public static UserFriendView userFriendView;
+        public static UserMenuFriendView userMenuFriendView;
+        public static FriendDeleteView friendDeleteView;
 
         private static void Main(string[] args)
         {
@@ -39,8 +42,11 @@ namespace SocialWeb
             messageSendingView = new MessageSendingView(userService, messageService);
             userIncomingMessageView = new UserIncomingMessageView();
             userOutcomingMessageView = new UserOutcomingMessageView();
+
             friendRequestView = new FriendRequestView(friendService, userService);
             userFriendView = new UserFriendView();
+            userMenuFriendView = new UserMenuFriendView();
+            friendDeleteView = new FriendDeleteView(friendService, userService);
 
             while (true)
             {

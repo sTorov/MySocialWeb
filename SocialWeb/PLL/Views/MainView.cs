@@ -7,14 +7,16 @@
             Console.WriteLine("Войти в профиль (нажмите 1)");
             Console.WriteLine("Зарегистрироваться (нажмите 2)");
 
-            switch (Console.ReadLine())
+            string keyValue = Console.ReadLine();
+
+            Console.Clear();
+
+            switch (keyValue)
             {
                 case "1":
-                    Console.Clear();
                     Program.autheticationView.Show();
                     break;
                 case "2":
-                    Console.Clear();
                     Program.registrationView.Show();
                     break;
             }

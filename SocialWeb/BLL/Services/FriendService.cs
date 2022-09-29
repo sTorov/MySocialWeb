@@ -31,6 +31,11 @@ namespace SocialWeb.BLL.Services
             return friends;
         }
 
+        public void DeleteFriendById(int friendId)
+        {
+            friendRepository.Delete(friendId);
+        }
+
         public void SendFriendRequest(FriendRequestData friendRequestData)
         {
             if (string.IsNullOrEmpty(friendRequestData.RecipientEmail))
@@ -42,13 +47,22 @@ namespace SocialWeb.BLL.Services
             var findUserEntity = userRepository.FindByEmail(friendRequestData.RecipientEmail);
             if (findUserEntity is null) throw new UserNotFoundException();
 
-            var friendEntity = new FriendEntity()
+            var friendEntityUser = new FriendEntity()
             {
                 user_id = friendRequestData.SenderId,
                 friend_id = findUserEntity.id,
             };
 
-            if (friendRepository.Create(friendEntity) == 0)
+            if (friendRepository.Create(friendEntityUser) == 0)
+                throw new Exception();
+
+            var friendEntityFriend = new FriendEntity()
+            {
+                user_id = findUserEntity.id,
+                friend_id = friendRequestData.SenderId,
+            };
+
+            if (friendRepository.Create(friendEntityFriend) == 0)
                 throw new Exception();
         }
     }
