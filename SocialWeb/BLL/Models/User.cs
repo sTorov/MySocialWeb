@@ -14,6 +14,10 @@
         public IEnumerable<Message> IncomingMessages { get; }
         public IEnumerable<Message> OutgoingMessages { get; }
 
+        public IEnumerable<FriendRequest> InputFriendRequests { get; }
+        public IEnumerable<FriendRequest> OutputFriendRequests { get; }
+
+
         public IEnumerable<Friend> Friends { get; }
 
         public User(
@@ -27,7 +31,9 @@
             string favoriteBook,
             IEnumerable<Message> incomingMessages,
             IEnumerable<Message> outgoingMessages,
-            IEnumerable<Friend> friends
+            IEnumerable<Friend> friends,
+            IEnumerable<FriendRequest> inputFriendRequests,
+            IEnumerable<FriendRequest> outputFriendRequest
             )
         {
             Id = id;
@@ -41,6 +47,8 @@
             IncomingMessages = incomingMessages;
             OutgoingMessages = outgoingMessages;
             Friends = friends;
+            InputFriendRequests = inputFriendRequests;
+            OutputFriendRequests = outputFriendRequest;
         }
     }
 }

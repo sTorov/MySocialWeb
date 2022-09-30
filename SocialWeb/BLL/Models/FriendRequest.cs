@@ -3,15 +3,15 @@
     public class FriendRequest
     {
         public int Id { get; }
-        public string UserEmail { get; }
-        public string UserFirstName { get; }
-        public string UserLastName { get; }
+        public string SenderEmail { get; }
+        public string SenderFirstName { get; }
+        public string SenderLastName { get; }
         public FriendRequest(int id, string userEmail, string userFirstName, string userLastName)
         {
             Id = id;
-            UserEmail = userEmail;
-            UserFirstName = userFirstName;
-            UserLastName = userLastName;            
+            SenderEmail = userEmail;
+            SenderFirstName = userFirstName;
+            SenderLastName = userLastName;            
         }
     }
 }

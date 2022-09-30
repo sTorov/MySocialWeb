@@ -5,14 +5,14 @@ using SocialWeb.PLL.Helpers;
 
 namespace SocialWeb.PLL.Views
 {
-    public class FriendRequestView
+    public class FriendRequestSendingView
     {
-        FriendService friendService;
+        FriendRequestService friendRequestService;
         UserService userService;
 
-        public FriendRequestView(FriendService friendService, UserService userService)
+        public FriendRequestSendingView(FriendRequestService friendRequestService, UserService userService)
         {
-            this.friendService = friendService;
+            this.friendRequestService = friendRequestService;
             this.userService = userService;
         }
 
@@ -27,9 +27,9 @@ namespace SocialWeb.PLL.Views
 
             try
             {
-                friendService.AddingFriend(friendRequestData);
+                friendRequestService.SendRequest(friendRequestData);
 
-                SuccessMessage.Show("Вы добавили нового друга!");
+                SuccessMessage.Show("Заявка отправлена!");
 
                 return userService.FindById(user.Id);
             }
@@ -45,12 +45,12 @@ namespace SocialWeb.PLL.Views
             }
             catch(ArgumentOutOfRangeException)
             {
-                AlertMessage.Show("Вы уже добавили данного пользователя в друзья!");
+                AlertMessage.Show("Вы уже добавили данного пользователя в друзья, либо заявка этому пользователю уже отправлена!");
                 return user;
             }
             catch (Exception)
             {
-                AlertMessage.Show("Поизошла ошиька при добавлении нового друга!");
+                AlertMessage.Show("Поизошла ошибка при отправке заявки!");
                 return user;
             }
         }

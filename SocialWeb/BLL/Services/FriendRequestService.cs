@@ -2,31 +2,44 @@
 using SocialWeb.BLL.Models;
 using SocialWeb.DAL.Entities;
 using SocialWeb.DAL.Repositories;
-using System.ComponentModel.DataAnnotations;
 
 namespace SocialWeb.BLL.Services
 {
     public class FriendRequestService
     {
         IFriendRequestRepository friendRequestRepository;
+        IFriendRepository friendRepository;
         IUserRepository userRepository;
 
         public FriendRequestService()
         {
             friendRequestRepository = new FriendRequestRepository();
+            friendRepository = new FriendRepository();
             userRepository = new UserRepository();
+        }
+
+        public FriendRequest FindRequest(FriendRequestData friendRequestData)
+        {
+            var findUserEntity = userRepository.FindByEmail(friendRequestData.FriendEmail);
+            if (findUserEntity is null) throw new UserNotFoundException();
+
+            var findFriendRequest = friendRequestRepository.FindAllByRequestedUserId(friendRequestData.UserId)
+                .FirstOrDefault(r => r.user_id == findUserEntity.id);
+            if (findFriendRequest is null) throw new EntityNotFoundException();
+
+            return new FriendRequest(findFriendRequest.id, findUserEntity.email, findUserEntity.firstname, findUserEntity.lastname);
         }
 
         public void SendRequest(FriendRequestData friendRequestData)
         {
-            if (string.IsNullOrEmpty(friendRequestData.FriendEmail))
-                throw new ArgumentNullException();
-
-            if (!new EmailAddressAttribute().IsValid(friendRequestData.FriendEmail))
-                throw new ArgumentNullException();
-
             var findUserEntity = userRepository.FindByEmail(friendRequestData.FriendEmail);
             if (findUserEntity is null) throw new UserNotFoundException();
+
+            if (friendRequestRepository.FindAllByRequestedUserId(friendRequestData.UserId).FirstOrDefault(e => e.user_id == findUserEntity.id) != null)
+                throw new ArgumentOutOfRangeException();
+
+            if (friendRepository.FindByUserIdAndFriendId(friendRequestData.UserId, findUserEntity.id) != null)
+                throw new ArgumentOutOfRangeException();
 
             var friendRequestEntity = new FriendRequestEntity()
             {
@@ -38,13 +51,32 @@ namespace SocialWeb.BLL.Services
                 throw new Exception();
         }
 
-        public IEnumerable<FriendRequest> FindAllRequestByUserId(int userId)
+        public IEnumerable<FriendRequest> FindAllInputRequestByUserId(int userId)
         {
             var friendRequests = new List<FriendRequest>();
 
             friendRequestRepository.FindAllByRequestedUserId(userId).ToList().ForEach(r =>
             {
                 var findUserEntity = userRepository.FindById(r.user_id);
+
+                friendRequests.Add(new FriendRequest(r.id, findUserEntity.email, findUserEntity.firstname, findUserEntity.lastname));
+            });
+
+            return friendRequests;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public IEnumerable<FriendRequest> FindAllOutputRequestByUserId(int userId)
+        {
+            var friendRequests = new List<FriendRequest>();
+
+            friendRequestRepository.FindAllByUserId(userId).ToList().ForEach(r =>
+            {
+                var findUserEntity = userRepository.FindById(r.requested_user_id);
 
                 friendRequests.Add(new FriendRequest(r.id, findUserEntity.email, findUserEntity.firstname, findUserEntity.lastname));
             });

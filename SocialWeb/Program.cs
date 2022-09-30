@@ -9,6 +9,7 @@ namespace SocialWeb
         static UserService userService;
         static MessageService messageService;
         static FriendService friendService;
+        static FriendRequestService friendRequestService;
         public static MainView mainView;
         public static RegistrationView registrationView;
         public static AutheticationView autheticationView;
@@ -19,10 +20,19 @@ namespace SocialWeb
         public static UserIncomingMessageView userIncomingMessageView;
         public static UserOutcomingMessageView userOutcomingMessageView;
 
-        public static FriendRequestView friendRequestView;
+        public static FriendRequestSendingView friendRequestSendingView;
         public static UserFriendView userFriendView;
         public static UserMenuFriendView userMenuFriendView;
         public static FriendDeleteView friendDeleteView;
+        public static UserMenuFriendRequestView userMenuFriendRequestView;
+        public static UserIncomingFriendRequestsView userIncomingFriendRequestsView;
+        public static UserOutcomingFriendRequestView userOutcomingFriendRequestView;
+        public static FriendAddingMenuView friendAddingMenuView;
+        public static FriendAddingByEmailView friendAddingByEmailView;
+        public static FriendAddingAllView friendAddingAllView;
+        public static FriendRequestDeletingMenuView friendRequestDeletingMenuView;
+        public static FriendRequestDeletingAllView friendRequestDeletingAllView;
+        public static FriendRequestDeletingByEmailView friendRequestDeletingByEmailView;
 
         private static void Main(string[] args)
         {
@@ -32,6 +42,7 @@ namespace SocialWeb
             userService = new UserService();
             messageService = new MessageService();
             friendService = new FriendService();
+            friendRequestService = new FriendRequestService();
 
             mainView = new MainView();
             registrationView = new RegistrationView(userService);
@@ -43,10 +54,19 @@ namespace SocialWeb
             userIncomingMessageView = new UserIncomingMessageView();
             userOutcomingMessageView = new UserOutcomingMessageView();
 
-            friendRequestView = new FriendRequestView(friendService, userService);
+            friendRequestSendingView = new FriendRequestSendingView(friendRequestService, userService);
             userFriendView = new UserFriendView();
             userMenuFriendView = new UserMenuFriendView();
             friendDeleteView = new FriendDeleteView(friendService, userService);
+            userMenuFriendRequestView = new UserMenuFriendRequestView();
+            userIncomingFriendRequestsView = new UserIncomingFriendRequestsView();
+            userOutcomingFriendRequestView = new UserOutcomingFriendRequestView();
+            friendAddingMenuView = new FriendAddingMenuView();
+            friendAddingAllView = new FriendAddingAllView(friendService, userService);
+            friendAddingByEmailView = new FriendAddingByEmailView(friendService, userService);
+            friendRequestDeletingMenuView = new FriendRequestDeletingMenuView();
+            friendRequestDeletingAllView = new FriendRequestDeletingAllView(friendRequestService, userService);
+            friendRequestDeletingByEmailView = new FriendRequestDeletingByEmailView(friendRequestService, userService);
 
             while (true)
             {

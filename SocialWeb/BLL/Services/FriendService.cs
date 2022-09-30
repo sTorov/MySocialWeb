@@ -9,11 +9,13 @@ namespace SocialWeb.BLL.Services
     public class FriendService
     {
         IFriendRepository friendRepository;
+        IFriendRequestRepository friendRequestRepository;
         IUserRepository userRepository;
 
         public FriendService()
         {
             friendRepository = new FriendRepository();
+            friendRequestRepository = new FriendRequestRepository();
             userRepository = new UserRepository();
         }
 
@@ -33,12 +35,6 @@ namespace SocialWeb.BLL.Services
 
         public void DeleteFriend(FriendRequestData friendRequestData)
         {
-            if (string.IsNullOrEmpty(friendRequestData.FriendEmail))
-                throw new ArgumentNullException();
-
-            if (!new EmailAddressAttribute().IsValid(friendRequestData.FriendEmail))
-                throw new ArgumentNullException();
-
             var deletingFriendEntity = userRepository.FindByEmail(friendRequestData.FriendEmail);
             if (deletingFriendEntity is null) throw new UserNotFoundException();
 
@@ -57,14 +53,16 @@ namespace SocialWeb.BLL.Services
 
         public void AddingFriend(FriendRequestData friendRequestData)
         {
-            if (string.IsNullOrEmpty(friendRequestData.FriendEmail))
-                throw new ArgumentNullException();
-
-            if (!new EmailAddressAttribute().IsValid(friendRequestData.FriendEmail))
-                throw new ArgumentNullException();
-
             var findUserEntity = userRepository.FindByEmail(friendRequestData.FriendEmail);
             if (findUserEntity is null) throw new UserNotFoundException();
+
+            var findFriendRequestEntity = friendRequestRepository.FindAllByRequestedUserId(friendRequestData.UserId)
+                .FirstOrDefault(r => r.user_id == findUserEntity.id);
+
+            if (findFriendRequestEntity is null) throw new Exception();
+
+            if (friendRequestRepository.Delete(findFriendRequestEntity.id) == 0)
+                throw new Exception();
 
             Create(friendRequestData.UserId, findUserEntity.id);
             Create(findUserEntity.id, friendRequestData.UserId);
