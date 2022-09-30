@@ -27,7 +27,7 @@ namespace SocialWeb.PLL.Views
 
             try
             {
-                friendService.SendFriendRequest(friendRequestData);
+                friendService.AddingFriend(friendRequestData);
 
                 SuccessMessage.Show("Вы добавили нового друга!");
 

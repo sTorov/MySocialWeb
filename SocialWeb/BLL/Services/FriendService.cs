@@ -55,7 +55,7 @@ namespace SocialWeb.BLL.Services
                 throw new Exception();
         }
 
-        public void SendFriendRequest(FriendRequestData friendRequestData)
+        public void AddingFriend(FriendRequestData friendRequestData)
         {
             if (string.IsNullOrEmpty(friendRequestData.FriendEmail))
                 throw new ArgumentNullException();
