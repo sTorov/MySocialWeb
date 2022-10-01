@@ -26,16 +26,14 @@ namespace SocialWeb
         public static FriendMenuView friendMenuView;
         public static FriendDeleteView friendDeleteView;
         public static UserMenuFriendRequestView userMenuFriendRequestView;
-        public static UserIncomingFriendRequestsView userIncomingFriendRequestsView;
-        public static UserOutcomingFriendRequestView userOutcomingFriendRequestView;
+        public static UserFriendRequestView userFriendRequestView;
         public static FriendAddingMenuView friendAddingMenuView;
         public static FriendAddingByEmailView friendAddingByEmailView;
         public static FriendAddingAllView friendAddingAllView;
         public static FriendRequestDeletingMenuView friendRequestDeletingMenuView;
-        public static FriendRequestDeletingAllView friendRequestDeletingAllView;
         public static FriendRequestDeletingByEmailView friendRequestDeletingByEmailView;
         public static FriendRequestAbortMenuView friendRequestAbortMenuView;
-        public static FriendRequestAbortAllView friendRequestAbortAllView;
+        public static FriendRequestDeletingAllView friendRequestDeletingAllView;
         public static FriendRequestAbortByEmailView friendRequestAbortByEmailView;
 
         private static void Main(string[] args)
@@ -66,19 +64,18 @@ namespace SocialWeb
 
             userMenuFriendRequestView = new UserMenuFriendRequestView();
 
-            userIncomingFriendRequestsView = new UserIncomingFriendRequestsView();
-            userOutcomingFriendRequestView = new UserOutcomingFriendRequestView();
+            userFriendRequestView = new UserFriendRequestView();
 
             friendAddingMenuView = new FriendAddingMenuView();
             friendAddingAllView = new FriendAddingAllView(friendService, userService);
             friendAddingByEmailView = new FriendAddingByEmailView(friendService, userService);
 
-            friendRequestDeletingMenuView = new FriendRequestDeletingMenuView();
             friendRequestDeletingAllView = new FriendRequestDeletingAllView(friendRequestService, userService);
+
+            friendRequestDeletingMenuView = new FriendRequestDeletingMenuView();
             friendRequestDeletingByEmailView = new FriendRequestDeletingByEmailView(friendRequestService, userService);
 
             friendRequestAbortMenuView = new FriendRequestAbortMenuView();
-            friendRequestAbortAllView = new FriendRequestAbortAllView(friendRequestService, userService);
             friendRequestAbortByEmailView = new FriendRequestAbortByEmailView(friendRequestService, userService);
 
             while (true)

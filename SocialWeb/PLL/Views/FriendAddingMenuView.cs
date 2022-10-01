@@ -1,5 +1,4 @@
 ﻿using SocialWeb.BLL.Models;
-using SocialWeb.BLL.Services;
 
 namespace SocialWeb.PLL.Views
 {
@@ -9,7 +8,9 @@ namespace SocialWeb.PLL.Views
         {
             while (true)
             {
-                if(!Program.userIncomingFriendRequestsView.Show(user))
+                Console.WriteLine("Входящие заявки\n");
+
+                if(!Program.userFriendRequestView.Show(user.InputFriendRequests))
                     return user;
 
                 Console.WriteLine("Принять все (нажмите 1)");
@@ -31,6 +32,9 @@ namespace SocialWeb.PLL.Views
                         break;
                     case "2":
                         user = Program.friendAddingByEmailView.Show(user);
+                        break;
+                    default:
+                        Console.Clear();
                         break;
                 }
             }        

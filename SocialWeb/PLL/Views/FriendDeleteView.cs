@@ -33,19 +33,9 @@ namespace SocialWeb.PLL.Views
 
                 return userService.FindById(user.Id);
             }
-            catch(ArgumentNullException)
-            {
-                AlertMessage.Show("Введите верное значение!");
-                return user;
-            }
             catch(UserNotFoundException)
             {
                 AlertMessage.Show("Пользователь не найден!");
-                return user;
-            }
-            catch(EntityNotFoundException)
-            {
-                AlertMessage.Show("Данный пользователь не является вашим другом!");
                 return user;
             }
             catch (Exception)

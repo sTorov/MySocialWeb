@@ -25,7 +25,7 @@ namespace SocialWeb.BLL.Services
 
             var findFriendRequest = friendRequestRepository.FindAllByRequestedUserId(friendRequestData.UserId)
                 .FirstOrDefault(r => r.user_id == findUserEntity.id);
-            if (findFriendRequest is null) throw new EntityNotFoundException();
+            if (findFriendRequest is null) throw new FriendRequestNotFoundException();
 
             return new FriendRequest(findFriendRequest.id, findUserEntity.email, findUserEntity.firstname, findUserEntity.lastname);
         }
@@ -37,7 +37,7 @@ namespace SocialWeb.BLL.Services
 
             var findFriendRequest = friendRequestRepository.FindAllByUserId(friendRequestData.UserId)
                 .FirstOrDefault(r => r.requested_user_id == findUserEntity.id);
-            if (findFriendRequest is null) throw new EntityNotFoundException();
+            if (findFriendRequest is null) throw new FriendRequestNotFoundException();
 
             return new FriendRequest(findFriendRequest.id, findUserEntity.email, findUserEntity.firstname, findUserEntity.lastname);
         }
@@ -46,6 +46,9 @@ namespace SocialWeb.BLL.Services
         {
             var findUserEntity = userRepository.FindByEmail(friendRequestData.FriendEmail);
             if (findUserEntity is null) throw new UserNotFoundException();
+
+            if (friendRequestData.UserId == findUserEntity.id)
+                throw new ArgumentOutOfRangeException();
 
             if (friendRequestRepository.FindAllByRequestedUserId(friendRequestData.UserId).FirstOrDefault(e => e.user_id == findUserEntity.id) != null)
                 throw new ArgumentOutOfRangeException();
@@ -98,6 +101,9 @@ namespace SocialWeb.BLL.Services
 
         public void DeleteRequest(int id)
         {
+            if (friendRequestRepository.FindById(id) == null)
+                throw new FriendRequestNotFoundException();
+
             if (friendRequestRepository.Delete(id) == 0)
                 throw new Exception();
         }

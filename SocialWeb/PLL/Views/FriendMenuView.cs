@@ -32,6 +32,9 @@ namespace SocialWeb.PLL.Views
                     case "2":
                         user = Program.friendDeleteView.Show(user);
                         break;
+                    default:
+                        Console.Clear();
+                        break;
                 }
             }
         }

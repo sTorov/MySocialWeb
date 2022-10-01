@@ -8,7 +8,9 @@ namespace SocialWeb.PLL.Views
         {
             while (true)
             {
-                if (!Program.userOutcomingFriendRequestView.Show(user))
+                Console.WriteLine("Исходящие заявки\n");
+
+                if (!Program.userFriendRequestView.Show(user.OutputFriendRequests))
                     return user;
 
                 Console.WriteLine("Отменить все (нажмите 1)");
@@ -26,10 +28,13 @@ namespace SocialWeb.PLL.Views
                 switch (keyValue)
                 {
                     case "1":
-                        user = Program.friendRequestAbortAllView.Show(user);
+                        user = Program.friendRequestDeletingAllView.Show(user.OutputFriendRequests, user);
                         break;
                     case "2":
                         user = Program.friendRequestAbortByEmailView.Show(user);
+                        break;
+                    default:
+                        Console.Clear();
                         break;
                 }
             }

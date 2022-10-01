@@ -33,11 +33,6 @@ namespace SocialWeb.PLL.Views
 
                 return userService.FindById(user.Id);
             }
-            catch(ArgumentNullException)
-            {
-                AlertMessage.Show("Введите корректный почтовый адрес!");
-                return user;
-            }
             catch(UserNotFoundException)
             {
                 AlertMessage.Show("Пользователь не найден!");

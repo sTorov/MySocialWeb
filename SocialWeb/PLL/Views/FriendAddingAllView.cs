@@ -1,4 +1,5 @@
-﻿using SocialWeb.BLL.Models;
+﻿using SocialWeb.BLL.Exceptions;
+using SocialWeb.BLL.Models;
 using SocialWeb.BLL.Services;
 using SocialWeb.PLL.Helpers;
 
@@ -39,9 +40,19 @@ namespace SocialWeb.PLL.Views
 
                 return userService.FindById(user.Id);
             }
+            catch (UserNotFoundException)
+            {
+                AlertMessage.Show("Пользователь не найден!");
+                return user;
+            }
+            catch (FriendRequestNotFoundException)
+            {
+                AlertMessage.Show("Заявка не найдена!");
+                return user;
+            }
             catch (Exception)
             {
-                AlertMessage.Show("Error");
+                AlertMessage.Show("Произошла ошибка при добавлении!");
                 return user;
             }
         }

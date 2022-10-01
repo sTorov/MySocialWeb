@@ -2,7 +2,6 @@
 using SocialWeb.BLL.Models;
 using SocialWeb.DAL.Entities;
 using SocialWeb.DAL.Repositories;
-using System.ComponentModel.DataAnnotations;
 
 namespace SocialWeb.BLL.Services
 {
@@ -45,7 +44,7 @@ namespace SocialWeb.BLL.Services
         private void Delete(int userId, int friendId)
         {
             var friendEntityForFriend = friendRepository.FindByUserIdAndFriendId(userId, friendId);
-            if (friendEntityForFriend is null) throw new EntityNotFoundException();
+            if (friendEntityForFriend is null) throw new ArgumentNullException();
 
             if (friendRepository.Delete(friendEntityForFriend.id) == 0)
                 throw new Exception();
@@ -59,7 +58,7 @@ namespace SocialWeb.BLL.Services
             var findFriendRequestEntity = friendRequestRepository.FindAllByRequestedUserId(friendRequestData.UserId)
                 .FirstOrDefault(r => r.user_id == findUserEntity.id);
 
-            if (findFriendRequestEntity is null) throw new Exception();
+            if (findFriendRequestEntity is null) throw new ArgumentNullException();
 
             if (friendRequestRepository.Delete(findFriendRequestEntity.id) == 0)
                 throw new Exception();
