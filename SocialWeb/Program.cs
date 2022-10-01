@@ -23,6 +23,7 @@ namespace SocialWeb
         public static FriendRequestSendingView friendRequestSendingView;
         public static UserFriendView userFriendView;
         public static UserMenuFriendView userMenuFriendView;
+        public static FriendMenuView friendMenuView;
         public static FriendDeleteView friendDeleteView;
         public static UserMenuFriendRequestView userMenuFriendRequestView;
         public static UserIncomingFriendRequestsView userIncomingFriendRequestsView;
@@ -60,6 +61,7 @@ namespace SocialWeb
             friendRequestSendingView = new FriendRequestSendingView(friendRequestService, userService);
             userFriendView = new UserFriendView();
             userMenuFriendView = new UserMenuFriendView();
+            friendMenuView = new FriendMenuView();
             friendDeleteView = new FriendDeleteView(friendService, userService);
 
             userMenuFriendRequestView = new UserMenuFriendRequestView();

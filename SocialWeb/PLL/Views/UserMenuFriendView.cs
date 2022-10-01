@@ -10,10 +10,9 @@ namespace SocialWeb.PLL.Views
             while(true)
             {
                 Console.WriteLine("Просмотреть список друзей (нажмите 1)");
-                Console.WriteLine("Удалить контакт из друзей (нажмите 2)");
-                Console.WriteLine("Запросить дружбу (нажмите 3)");
-                Console.WriteLine("Обозреватель заявок (нажмите 4)");
-                Console.WriteLine("Назад (нажмите 5)\n");
+                Console.WriteLine("Запросить дружбу (нажмите 2)");
+                Console.WriteLine("Обозреватель заявок (нажмите 3)");
+                Console.WriteLine("Назад (нажмите 4)\n");
 
                 if(user.InputFriendRequests.Count() > 0)
                     AttentionMessage.Show($"Входящие заявки на дружбу: {user.InputFriendRequests.Count()}\n");
@@ -25,21 +24,18 @@ namespace SocialWeb.PLL.Views
 
                 Console.Clear();
 
-                if (keyValue == "5")
+                if (keyValue == "4")
                     break;
 
                 switch (keyValue)
                 {
                     case "1":
-                        Program.userFriendView.Show(user.Friends);
+                        user = Program.friendMenuView.Show(user);
                         break;
                     case "2":
-                        user = Program.friendDeleteView.Show(user);
-                        break;
-                    case "3":
                         user = Program.friendRequestSendingView.Show(user);
                         break;
-                    case "4":
+                    case "3":
                         user = Program.userMenuFriendRequestView.Show(user);
                         break;
                 }
