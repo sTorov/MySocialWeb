@@ -33,6 +33,9 @@ namespace SocialWeb
         public static FriendRequestDeletingMenuView friendRequestDeletingMenuView;
         public static FriendRequestDeletingAllView friendRequestDeletingAllView;
         public static FriendRequestDeletingByEmailView friendRequestDeletingByEmailView;
+        public static FriendRequestAbortMenuView friendRequestAbortMenuView;
+        public static FriendRequestAbortAllView friendRequestAbortAllView;
+        public static FriendRequestAbortByEmailView friendRequestAbortByEmailView;
 
         private static void Main(string[] args)
         {
@@ -58,15 +61,23 @@ namespace SocialWeb
             userFriendView = new UserFriendView();
             userMenuFriendView = new UserMenuFriendView();
             friendDeleteView = new FriendDeleteView(friendService, userService);
+
             userMenuFriendRequestView = new UserMenuFriendRequestView();
+
             userIncomingFriendRequestsView = new UserIncomingFriendRequestsView();
             userOutcomingFriendRequestView = new UserOutcomingFriendRequestView();
+
             friendAddingMenuView = new FriendAddingMenuView();
             friendAddingAllView = new FriendAddingAllView(friendService, userService);
             friendAddingByEmailView = new FriendAddingByEmailView(friendService, userService);
+
             friendRequestDeletingMenuView = new FriendRequestDeletingMenuView();
             friendRequestDeletingAllView = new FriendRequestDeletingAllView(friendRequestService, userService);
             friendRequestDeletingByEmailView = new FriendRequestDeletingByEmailView(friendRequestService, userService);
+
+            friendRequestAbortMenuView = new FriendRequestAbortMenuView();
+            friendRequestAbortAllView = new FriendRequestAbortAllView(friendRequestService, userService);
+            friendRequestAbortByEmailView = new FriendRequestAbortByEmailView(friendRequestService, userService);
 
             while (true)
             {

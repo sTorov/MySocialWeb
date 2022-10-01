@@ -9,35 +9,21 @@ namespace SocialWeb.PLL.Views
         {      
             while(true)
             {
-                Console.WriteLine("Для добавления или удаления необходимо указать почтовый адрес отправителя зяавки.");
-                Console.WriteLine("Узнать его можно в списке заявок.\n");
-
                 Console.WriteLine("Добавить в друзья (нажмите 1)");
-                Console.WriteLine("Отклонить заявку (нажмите 2)");               
+                Console.WriteLine("Отклонить заявку (нажмите 2)");    
+                Console.WriteLine("Отменить исходящую заявку (нажмите 3)");
+                Console.WriteLine("Назад (нажмите 4)\n");
 
-                if(user.InputFriendRequests.Count() > 0)
-                {
-                    Console.Write("Список входящих заявок (нажмите 3)    ");
-                    AttentionMessage.Show($"Заявок: {user.InputFriendRequests.Count()}\n");
-                }
-                else
-                    Console.WriteLine("Список входящих заявок (нажмите 3)");
-
+                if (user.InputFriendRequests.Count() > 0)
+                    AttentionMessage.Show($"Входящие заявки: {user.InputFriendRequests.Count()}\n");
                 if (user.OutputFriendRequests.Count() > 0)
-                {
-                    Console.Write("Список исходящих заявок (нажмите 4)    ");
-                    AttentionMessage.Show($"Заявок: {user.OutputFriendRequests.Count()}\n");
-                }
-                else
-                    Console.WriteLine("Список исходящих заявок (нажмите 4)");
-
-                Console.WriteLine("Выйти из обозревателя заявок (нажмите 5)");
+                    AttentionMessage.Show($"Исходящие заявки: {user.OutputFriendRequests.Count()}\n");
 
                 string keyValue = Console.ReadLine();
 
                 Console.Clear();
 
-                if(keyValue == "5")
+                if(keyValue == "4")
                     return user;
 
                 switch (keyValue)
@@ -49,10 +35,7 @@ namespace SocialWeb.PLL.Views
                         user = Program.friendRequestDeletingMenuView.Show(user);
                         break;
                     case "3":
-                        Program.userIncomingFriendRequestsView.Show(user);
-                        break;
-                    case "4":
-                        Program.userOutcomingFriendRequestView.Show(user);
+                        user = Program.friendRequestAbortMenuView.Show(user);
                         break;
                 }
             }

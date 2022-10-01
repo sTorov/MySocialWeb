@@ -1,15 +1,20 @@
 ﻿using SocialWeb.BLL.Models;
 using SocialWeb.BLL.Services;
 using SocialWeb.PLL.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SocialWeb.PLL.Views
 {
-    public class FriendRequestDeletingAllView
+    public class FriendRequestAbortAllView
     {
         FriendRequestService friendRequestService;
         UserService userService;
 
-        public FriendRequestDeletingAllView(FriendRequestService friendRequestService, UserService userService)
+        public FriendRequestAbortAllView(FriendRequestService friendRequestService, UserService userService)
         {
             this.friendRequestService = friendRequestService;
             this.userService = userService;
@@ -17,7 +22,7 @@ namespace SocialWeb.PLL.Views
 
         public User Show(User user)
         {
-            if (user.InputFriendRequests.Count() == 0)
+            if (user.OutputFriendRequests.Count() == 0)
             {
                 AlertMessage.Show("Заявки отсутствуют!");
                 return user;
@@ -25,12 +30,12 @@ namespace SocialWeb.PLL.Views
 
             try
             {
-                user.InputFriendRequests.ToList().ForEach(r =>
+                user.OutputFriendRequests.ToList().ForEach(r =>
                 {
                     friendRequestService.DeleteRequest(r.Id);
                 });
 
-                SuccessMessage.Show("Все заявки отклонены!");
+                SuccessMessage.Show("Все заявки отменены!");
 
                 return userService.FindById(user.Id);
             }
@@ -39,7 +44,7 @@ namespace SocialWeb.PLL.Views
                 AlertMessage.Show("Error");
                 return user;
             }
-        }
 
+        }
     }
 }

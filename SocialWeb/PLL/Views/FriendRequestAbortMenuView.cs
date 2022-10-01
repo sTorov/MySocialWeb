@@ -2,17 +2,17 @@
 
 namespace SocialWeb.PLL.Views
 {
-    public class FriendRequestDeletingMenuView
+    public class FriendRequestAbortMenuView
     {
         public User Show(User user)
         {
             while (true)
             {
-                if(!Program.userIncomingFriendRequestsView.Show(user))
+                if (!Program.userOutcomingFriendRequestView.Show(user))
                     return user;
 
-                Console.WriteLine("Отклонить все (нажмите 1)");
-                Console.WriteLine("Отклонить заявку, указав email (нажмите 2)");
+                Console.WriteLine("Отменить все (нажмите 1)");
+                Console.WriteLine("Отменить заявку, указав email (нажмите 2)");
                 Console.WriteLine("Назад (нажмите 3)\n");
 
                 string keyValue = Console.ReadLine();
@@ -26,13 +26,12 @@ namespace SocialWeb.PLL.Views
                 switch (keyValue)
                 {
                     case "1":
-                        user = Program.friendRequestDeletingAllView.Show(user);
+                        user = Program.friendRequestAbortAllView.Show(user);
                         break;
                     case "2":
-                        user = Program.friendRequestDeletingByEmailView.Show(user);
+                        user = Program.friendRequestAbortByEmailView.Show(user);
                         break;
                 }
-
             }
         }
     }

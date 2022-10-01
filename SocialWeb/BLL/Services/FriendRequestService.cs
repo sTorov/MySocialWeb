@@ -18,13 +18,25 @@ namespace SocialWeb.BLL.Services
             userRepository = new UserRepository();
         }
 
-        public FriendRequest FindRequest(FriendRequestData friendRequestData)
+        public FriendRequest FindInputRequest(FriendRequestData friendRequestData)
         {
             var findUserEntity = userRepository.FindByEmail(friendRequestData.FriendEmail);
             if (findUserEntity is null) throw new UserNotFoundException();
 
             var findFriendRequest = friendRequestRepository.FindAllByRequestedUserId(friendRequestData.UserId)
                 .FirstOrDefault(r => r.user_id == findUserEntity.id);
+            if (findFriendRequest is null) throw new EntityNotFoundException();
+
+            return new FriendRequest(findFriendRequest.id, findUserEntity.email, findUserEntity.firstname, findUserEntity.lastname);
+        }
+
+        public FriendRequest FindOutputRequest(FriendRequestData friendRequestData)
+        {
+            var findUserEntity = userRepository.FindByEmail(friendRequestData.FriendEmail);
+            if (findUserEntity is null) throw new UserNotFoundException();
+
+            var findFriendRequest = friendRequestRepository.FindAllByUserId(friendRequestData.UserId)
+                .FirstOrDefault(r => r.requested_user_id == findUserEntity.id);
             if (findFriendRequest is null) throw new EntityNotFoundException();
 
             return new FriendRequest(findFriendRequest.id, findUserEntity.email, findUserEntity.firstname, findUserEntity.lastname);

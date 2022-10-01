@@ -20,7 +20,7 @@ namespace SocialWeb.PLL.Views
         {
             var friendRequestData = new FriendRequestData();
 
-            Console.WriteLine("Введите почтовый адрес вашего нового друга:");
+            Console.WriteLine("Для отправки заявки введите почтовый адрес пользователя:");
             friendRequestData.FriendEmail = Console.ReadLine();
 
             friendRequestData.UserId = user.Id;

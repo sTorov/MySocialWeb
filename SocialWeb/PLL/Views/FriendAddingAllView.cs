@@ -19,9 +19,7 @@ namespace SocialWeb.PLL.Views
         {
             if(user.InputFriendRequests.Count() == 0)
             {
-                Console.WriteLine("Заявки отсутствуют!");
-                Console.ReadKey();
-                Console.Clear();
+                AlertMessage.Show("Заявки отсутствуют!");
                 return user;
             }
 

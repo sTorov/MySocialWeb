@@ -19,14 +19,14 @@ namespace SocialWeb.PLL.Views
         {
             var friendRequestData = new FriendRequestData();
 
-            Console.WriteLine("Введите почтовый адрес отправителя для отклонения заявки:");
+            Console.WriteLine("Введите почтовый адрес:");
             friendRequestData.FriendEmail = Console.ReadLine();
 
             friendRequestData.UserId = user.Id;
 
             try
             {
-                var findRequest = friendRequestService.FindRequest(friendRequestData);
+                var findRequest = friendRequestService.FindInputRequest(friendRequestData);
                 friendRequestService.DeleteRequest(findRequest.Id);
 
                 SuccessMessage.Show("Заявка успешно отклонена!");

@@ -20,7 +20,7 @@ namespace SocialWeb.PLL.Views
         {
             FriendRequestData friendRequestData = new FriendRequestData(); 
 
-            Console.WriteLine("Введите почтовый адрес удаляемого контакта:");
+            Console.WriteLine("Введите почтовый адрес:");
             friendRequestData.FriendEmail = Console.ReadLine();
 
             friendRequestData.UserId = user.Id;

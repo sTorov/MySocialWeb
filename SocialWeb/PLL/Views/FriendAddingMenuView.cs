@@ -9,16 +9,20 @@ namespace SocialWeb.PLL.Views
         {
             while (true)
             {
+                if(!Program.userIncomingFriendRequestsView.Show(user))
+                    return user;
+
                 Console.WriteLine("Принять все (нажмите 1)");
-                Console.WriteLine("Принять заявку от пользователя, указав email (нажмите 2)");
-                Console.WriteLine("Назад (нажмите 3)");
+                Console.WriteLine("Принять заявку, указав email (нажмите 2)");
+                Console.WriteLine("Назад (нажмите 3)\n");
 
                 string keyValue = Console.ReadLine();
 
-                Console.Clear();
-
                 if (keyValue == "3")
+                {
+                    Console.Clear();
                     return user;
+                }
 
                 switch (keyValue)
                 {

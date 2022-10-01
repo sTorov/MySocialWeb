@@ -13,7 +13,7 @@ namespace SocialWeb.PLL.Views
                 Console.WriteLine("Удалить контакт из друзей (нажмите 2)");
                 Console.WriteLine("Запросить дружбу (нажмите 3)");
                 Console.WriteLine("Обозреватель заявок (нажмите 4)");
-                Console.WriteLine("Выйти из меню друзей (нажмите 5)\n");
+                Console.WriteLine("Назад (нажмите 5)\n");
 
                 if(user.InputFriendRequests.Count() > 0)
                     AttentionMessage.Show($"Входящие заявки на дружбу: {user.InputFriendRequests.Count()}\n");

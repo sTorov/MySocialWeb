@@ -4,14 +4,14 @@ using SocialWeb.PLL.Helpers;
 
 namespace SocialWeb.PLL.Views
 {
-    public class FriendAddingByEmailView
+    public class FriendRequestAbortByEmailView
     {
-        FriendService friendService;
+        FriendRequestService friendRequestService;
         UserService userService;
 
-        public FriendAddingByEmailView(FriendService friendService, UserService userService)
+        public FriendRequestAbortByEmailView(FriendRequestService friendRequestService, UserService userService)
         {
-            this.friendService = friendService;
+            this.friendRequestService = friendRequestService;
             this.userService = userService;
         }
 
@@ -26,9 +26,10 @@ namespace SocialWeb.PLL.Views
 
             try
             {
-                friendService.AddingFriend(friendRequestData);
+                var findRequest = friendRequestService.FindOutputRequest(friendRequestData);
+                friendRequestService.DeleteRequest(findRequest.Id);
 
-                SuccessMessage.Show("Заявка успешно принята!");
+                SuccessMessage.Show("Заявка успешно отменена!");
 
                 return userService.FindById(user.Id);
             }
@@ -38,5 +39,6 @@ namespace SocialWeb.PLL.Views
                 return user;
             }
         }
+
     }
 }
