@@ -48,7 +48,7 @@ namespace SocialWeb.BLL.Services
             if (findUserEntity is null) throw new UserNotFoundException();
 
             if (friendRequestData.UserId == findUserEntity.id)
-                throw new ArgumentOutOfRangeException();
+                throw new Exception();
 
             if (friendRequestRepository.FindAllByRequestedUserId(friendRequestData.UserId).FirstOrDefault(e => e.user_id == findUserEntity.id) != null)
                 throw new ArgumentOutOfRangeException();

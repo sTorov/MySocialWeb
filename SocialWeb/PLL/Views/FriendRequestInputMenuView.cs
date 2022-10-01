@@ -2,7 +2,7 @@
 
 namespace SocialWeb.PLL.Views
 {
-    public class FriendAddingMenuView
+    public class FriendRequestInputMenuView
     {
         public User Show(User user)
         {
@@ -15,11 +15,13 @@ namespace SocialWeb.PLL.Views
 
                 Console.WriteLine("Принять все (нажмите 1)");
                 Console.WriteLine("Принять заявку, указав email (нажмите 2)");
-                Console.WriteLine("Назад (нажмите 3)\n");
+                Console.WriteLine("Отклонить все (нажмите 3)");
+                Console.WriteLine("Отклонить заявку, указав email (нажмите 4)");
+                Console.WriteLine("Назад (нажмите 5)\n");
 
                 string keyValue = Console.ReadLine();
 
-                if (keyValue == "3")
+                if (keyValue == "5")
                 {
                     Console.Clear();
                     return user;
@@ -32,6 +34,12 @@ namespace SocialWeb.PLL.Views
                         break;
                     case "2":
                         user = Program.friendAddingByEmailView.Show(user);
+                        break;
+                    case "3":
+                        user = Program.friendRequestDeletingAllView.Show(user.InputFriendRequests, user);
+                        break;
+                    case "4":
+                        user = Program.friendRequestDeletingByEmailView.Show(user);
                         break;
                     default:
                         Console.Clear();

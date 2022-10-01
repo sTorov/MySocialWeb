@@ -40,7 +40,7 @@ namespace SocialWeb.PLL.Views
             }
             catch(ArgumentOutOfRangeException)
             {
-                AlertMessage.Show("Вы уже добавили данного пользователя в друзья, либо заявка этому пользователю уже отправлена!");
+                AlertMessage.Show("Вы уже добавили данного пользователя в друзья, либо заявка уже отправлена!");
                 return user;
             }
             catch (Exception)

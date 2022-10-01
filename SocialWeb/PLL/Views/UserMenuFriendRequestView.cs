@@ -9,32 +9,38 @@ namespace SocialWeb.PLL.Views
         {      
             while(true)
             {
-                Console.WriteLine("Добавить в друзья (нажмите 1)");
-                Console.WriteLine("Отклонить заявку (нажмите 2)");    
-                Console.WriteLine("Отменить исходящую заявку (нажмите 3)");
-                Console.WriteLine("Назад (нажмите 4)\n");
 
                 if (user.InputFriendRequests.Count() > 0)
-                    AttentionMessage.Show($"Входящие заявки: {user.InputFriendRequests.Count()}\n");
+                {
+                    Console.Write("Входящие заявки (нажмите 1)   ");
+                    AttentionMessage.Show($"Заявки: {user.InputFriendRequests.Count()}\n");
+                }
+                else
+                    Console.WriteLine("Входящие заявки (нажмите 1)");
+                
                 if (user.OutputFriendRequests.Count() > 0)
-                    AttentionMessage.Show($"Исходящие заявки: {user.OutputFriendRequests.Count()}\n");
+                {
+                    Console.Write("Исходящие заявки (нажмите 2)   ");
+                    AttentionMessage.Show($"Заявки: {user.OutputFriendRequests.Count()}\n");
+                }
+                else
+                    Console.WriteLine("Исходящие заявки (нажмите 2)");    
+                
+                Console.WriteLine("Назад (нажмите 3)\n");
 
                 string keyValue = Console.ReadLine();
 
                 Console.Clear();
 
-                if(keyValue == "4")
+                if(keyValue == "3")
                     return user;
 
                 switch (keyValue)
                 {
                     case "1":
-                        user = Program.friendAddingMenuView.Show(user);
+                        user = Program.friendRequestInputMenuView.Show(user);
                         break;
                     case "2":
-                        user = Program.friendRequestDeletingMenuView.Show(user);
-                        break;
-                    case "3":
                         user = Program.friendRequestAbortMenuView.Show(user);
                         break;
                 }

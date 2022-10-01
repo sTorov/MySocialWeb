@@ -10,6 +10,7 @@ namespace SocialWeb
         static MessageService messageService;
         static FriendService friendService;
         static FriendRequestService friendRequestService;
+
         public static MainView mainView;
         public static RegistrationView registrationView;
         public static AutheticationView autheticationView;
@@ -20,20 +21,22 @@ namespace SocialWeb
         public static UserIncomingMessageView userIncomingMessageView;
         public static UserOutcomingMessageView userOutcomingMessageView;
 
-        public static FriendRequestSendingView friendRequestSendingView;
-        public static UserFriendView userFriendView;
         public static UserMenuFriendView userMenuFriendView;
         public static FriendMenuView friendMenuView;
+        public static UserFriendView userFriendView;
         public static FriendDeleteView friendDeleteView;
+
         public static UserMenuFriendRequestView userMenuFriendRequestView;
+        public static FriendRequestSendingView friendRequestSendingView;
         public static UserFriendRequestView userFriendRequestView;
-        public static FriendAddingMenuView friendAddingMenuView;
+
+        public static FriendRequestInputMenuView friendRequestInputMenuView;
         public static FriendAddingByEmailView friendAddingByEmailView;
         public static FriendAddingAllView friendAddingAllView;
-        public static FriendRequestDeletingMenuView friendRequestDeletingMenuView;
-        public static FriendRequestDeletingByEmailView friendRequestDeletingByEmailView;
-        public static FriendRequestAbortMenuView friendRequestAbortMenuView;
         public static FriendRequestDeletingAllView friendRequestDeletingAllView;
+        public static FriendRequestDeletingByEmailView friendRequestDeletingByEmailView;
+
+        public static FriendRequestAbortMenuView friendRequestAbortMenuView;
         public static FriendRequestAbortByEmailView friendRequestAbortByEmailView;
 
         private static void Main(string[] args)
@@ -55,24 +58,20 @@ namespace SocialWeb
             messageSendingView = new MessageSendingView(userService, messageService);
             userIncomingMessageView = new UserIncomingMessageView();
             userOutcomingMessageView = new UserOutcomingMessageView();
-
-            friendRequestSendingView = new FriendRequestSendingView(friendRequestService, userService);
-            userFriendView = new UserFriendView();
+            
             userMenuFriendView = new UserMenuFriendView();
             friendMenuView = new FriendMenuView();
+            userFriendView = new UserFriendView();
             friendDeleteView = new FriendDeleteView(friendService, userService);
-
+            
             userMenuFriendRequestView = new UserMenuFriendRequestView();
-
             userFriendRequestView = new UserFriendRequestView();
+            friendRequestSendingView = new FriendRequestSendingView(friendRequestService, userService);
 
-            friendAddingMenuView = new FriendAddingMenuView();
+            friendRequestInputMenuView = new FriendRequestInputMenuView();
             friendAddingAllView = new FriendAddingAllView(friendService, userService);
             friendAddingByEmailView = new FriendAddingByEmailView(friendService, userService);
-
             friendRequestDeletingAllView = new FriendRequestDeletingAllView(friendRequestService, userService);
-
-            friendRequestDeletingMenuView = new FriendRequestDeletingMenuView();
             friendRequestDeletingByEmailView = new FriendRequestDeletingByEmailView(friendRequestService, userService);
 
             friendRequestAbortMenuView = new FriendRequestAbortMenuView();
