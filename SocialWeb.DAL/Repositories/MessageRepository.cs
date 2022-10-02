@@ -2,7 +2,7 @@
     
 namespace SocialWeb.DAL.Repositories
 {
-    class MessageRepository : BaseRepository, IMessageRepository
+    public class MessageRepository : BaseRepository, IMessageRepository
     {
         public int Create(MessageEntity messageEntity)
         {

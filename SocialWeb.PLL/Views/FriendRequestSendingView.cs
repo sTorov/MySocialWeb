@@ -38,9 +38,19 @@ namespace SocialWeb.PLL.Views
                 AlertMessage.Show("Пользователь не найден!");
                 return user;
             }
-            catch(ArgumentOutOfRangeException)
+            catch (FriendFoundException)
             {
-                AlertMessage.Show("Вы уже добавили данного пользователя в друзья, либо заявка уже отправлена!");
+                AlertMessage.Show("Пользователь уже является вашим другом!");
+                return user;
+            }
+            catch (ArgumentNullException)
+            {
+                AlertMessage.Show("Невозможно отправить заявку самому себе!");
+                return user;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                AlertMessage.Show("Заявка уже отправлена!");
                 return user;
             }
             catch (Exception)

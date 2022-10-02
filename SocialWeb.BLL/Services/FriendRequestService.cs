@@ -48,13 +48,16 @@ namespace SocialWeb.BLL.Services
             if (findUserEntity is null) throw new UserNotFoundException();
 
             if (friendRequestData.UserId == findUserEntity.id)
-                throw new Exception();
+                throw new ArgumentNullException();
+
+            if (friendRequestRepository.FindAllByUserId(friendRequestData.UserId).FirstOrDefault(e => e.requested_user_id == findUserEntity.id) != null)
+                throw new ArgumentOutOfRangeException();
 
             if (friendRequestRepository.FindAllByRequestedUserId(friendRequestData.UserId).FirstOrDefault(e => e.user_id == findUserEntity.id) != null)
                 throw new ArgumentOutOfRangeException();
 
             if (friendRepository.FindByUserIdAndFriendId(friendRequestData.UserId, findUserEntity.id) != null)
-                throw new ArgumentOutOfRangeException();
+                throw new FriendFoundException();
 
             var friendRequestEntity = new FriendRequestEntity()
             {

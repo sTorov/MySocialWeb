@@ -1,6 +1,6 @@
 ﻿namespace SocialWeb.BLL.Exceptions
 {
-    class UserNotFoundException : Exception
+    public class FriendFoundException : Exception
     {
     }
 }
