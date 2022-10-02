@@ -1,5 +1,8 @@
 ﻿namespace SocialWeb.BLL.Models
 {
+    /// <summary>
+    /// Объект пользователя
+    /// </summary>
     public class User
     {
         public int Id { get; set; }

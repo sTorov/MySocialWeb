@@ -17,7 +17,7 @@ namespace SocialWeb.PLL.Views
 
             friendRequests.ToList().ForEach(r =>
             {
-                Console.WriteLine($"{r.SenderFirstName,-15}{r.SenderLastName,-15}{r.SenderEmail}");
+                Console.WriteLine($"{r.FirstName,-15}{r.LastName,-15}{r.Email}");
             });
 
             Console.WriteLine();

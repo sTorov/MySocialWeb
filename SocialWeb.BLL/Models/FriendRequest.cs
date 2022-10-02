@@ -1,17 +1,21 @@
 ﻿namespace SocialWeb.BLL.Models
 {
+    /// <summary>
+    /// Объект запроса на добавление в друзья
+    /// </summary>
     public class FriendRequest
     {
         public int Id { get; }
-        public string SenderEmail { get; }
-        public string SenderFirstName { get; }
-        public string SenderLastName { get; }
-        public FriendRequest(int id, string userEmail, string userFirstName, string userLastName)
+        public string FirstName { get; }
+        public string LastName { get; }
+        public string Email { get; }
+
+        public FriendRequest(int id, string email, string firstName, string lastName)
         {
             Id = id;
-            SenderEmail = userEmail;
-            SenderFirstName = userFirstName;
-            SenderLastName = userLastName;            
+            Email = email;
+            FirstName = firstName;
+            LastName = lastName;            
         }
     }
 }

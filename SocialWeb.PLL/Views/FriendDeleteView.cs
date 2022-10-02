@@ -18,16 +18,16 @@ namespace SocialWeb.PLL.Views
 
         public User Show(User user)
         {
-            FriendRequestData friendRequestData = new FriendRequestData(); 
+            FriendRequestSendingData friendRequestSendingData = new FriendRequestSendingData(); 
 
             Console.WriteLine("Введите почтовый адрес:");
-            friendRequestData.FriendEmail = Console.ReadLine();
+            friendRequestSendingData.RecipientEmail = Console.ReadLine();
 
-            friendRequestData.UserId = user.Id;
+            friendRequestSendingData.UserId = user.Id;
 
             try
             {
-                friendService.DeleteFriend(friendRequestData);
+                friendService.DeleteFriend(friendRequestSendingData);
                 
                 SuccessMessage.Show("Удаление прошло успешно!");
 

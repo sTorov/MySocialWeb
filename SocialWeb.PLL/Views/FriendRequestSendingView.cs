@@ -18,16 +18,16 @@ namespace SocialWeb.PLL.Views
 
         public User Show(User user)
         {
-            var friendRequestData = new FriendRequestData();
+            var friendRequestSendingData = new FriendRequestSendingData();
 
             Console.WriteLine("Для отправки заявки введите почтовый адрес пользователя:");
-            friendRequestData.FriendEmail = Console.ReadLine();
+            friendRequestSendingData.RecipientEmail = Console.ReadLine();
 
-            friendRequestData.UserId = user.Id;
+            friendRequestSendingData.UserId = user.Id;
 
             try
             {
-                friendRequestService.SendRequest(friendRequestData);
+                friendRequestService.SendRequest(friendRequestSendingData);
 
                 SuccessMessage.Show("Заявка отправлена!");
 

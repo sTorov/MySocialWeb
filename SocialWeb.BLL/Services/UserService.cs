@@ -6,6 +6,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SocialWeb.BLL.Services
 {
+    /// <summary>
+    /// Сервис пользователя
+    /// </summary>
     public class UserService
     {
         IUserRepository userRepository;
@@ -21,6 +24,12 @@ namespace SocialWeb.BLL.Services
             friendRequestService = new FriendRequestService();
         }
 
+        /// <summary>
+        /// Регистрация нового пользователя. 
+        /// </summary>
+        /// <param name="userRegistrationData"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="Exception"></exception>
         public void Register(UserRegistrationData userRegistrationData)
         {
             if (string.IsNullOrEmpty(userRegistrationData.FirstName))
@@ -56,6 +65,13 @@ namespace SocialWeb.BLL.Services
                 throw new Exception();
         }
 
+        /// <summary>
+        /// Авторизация пользователя.
+        /// </summary>
+        /// <param name="userAuthenticationData"></param>
+        /// <returns></returns>
+        /// <exception cref="UserNotFoundException"></exception>
+        /// <exception cref="WrongPasswordException"></exception>
         public User Authenticate(UserAuthenticationData userAuthenticationData)
         {
             var findUserEntity = userRepository.FindByEmail(userAuthenticationData.Email);
@@ -69,6 +85,12 @@ namespace SocialWeb.BLL.Services
             return ConstructUserModel(findUserEntity);
         }
 
+        /// <summary>
+        /// Поиск пользователя по его почтовому адресу.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        /// <exception cref="UserNotFoundException"></exception>
         public User FindByEmail(string email)
         {
             var findUserEntity = userRepository.FindByEmail(email);
@@ -77,6 +99,12 @@ namespace SocialWeb.BLL.Services
             return ConstructUserModel(findUserEntity);
         }
 
+        /// <summary>
+        /// Поиск пользователя по его ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="UserNotFoundException"></exception>
         public User FindById(int id)
         {
             var findUserEntity = userRepository.FindById(id);
@@ -85,6 +113,11 @@ namespace SocialWeb.BLL.Services
             return ConstructUserModel(findUserEntity);
         }
 
+        /// <summary>
+        /// Обновление информации пользователя.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <exception cref="Exception"></exception>
         public void Update(User user)
         {
             var updatableUserEntity = new UserEntity()
@@ -103,6 +136,11 @@ namespace SocialWeb.BLL.Services
                 throw new Exception();
         }
 
+        /// <summary>
+        /// Создание нового объекта пользователя.
+        /// </summary>
+        /// <param name="userEntity"></param>
+        /// <returns></returns>
         private User ConstructUserModel(UserEntity userEntity)
         {
             var incomingMessage = messageService.GetIncomingMessagesByUserId(userEntity.id);

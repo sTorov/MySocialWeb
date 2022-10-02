@@ -1,5 +1,8 @@
 ﻿namespace SocialWeb.BLL.Models
 {
+    /// <summary>
+    /// Объект сообщения
+    /// </summary>
     public class Message
     {
         public int Id { get; }

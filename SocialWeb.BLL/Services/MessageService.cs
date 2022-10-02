@@ -5,6 +5,9 @@ using SocialWeb.DAL.Repositories;
 
 namespace SocialWeb.BLL.Services
 {
+    /// <summary>
+    /// Сервис сообщений
+    /// </summary>
     public class MessageService
     {
         IMessageRepository messageRepository;
@@ -16,6 +19,11 @@ namespace SocialWeb.BLL.Services
             messageRepository = new MessageRepository();
         }
 
+        /// <summary>
+        /// Получение списка всех входящих сообщений текущего пользователя по его ID.
+        /// </summary>
+        /// <param name="recipientId"></param>
+        /// <returns></returns>
         public IEnumerable<Message> GetIncomingMessagesByUserId(int recipientId)
         {
             var messages = new List<Message>();
@@ -31,6 +39,11 @@ namespace SocialWeb.BLL.Services
             return messages;
         }
 
+        /// <summary>
+        /// Получение списка всех исходящих сообщений текущего пользователя по его ID.
+        /// </summary>
+        /// <param name="senderId"></param>
+        /// <returns></returns>
         public IEnumerable<Message> GetOutcomingMessagesByUserId(int senderId)
         {
             var messages = new List<Message>();
@@ -46,6 +59,14 @@ namespace SocialWeb.BLL.Services
             return messages;
         }
 
+        /// <summary>
+        /// Отправка сообщения
+        /// </summary>
+        /// <param name="messageSendingData"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="UserNotFoundException"></exception>
+        /// <exception cref="Exception"></exception>
         public void SendMessage(MessageSendingData messageSendingData)
         {
             if (string.IsNullOrEmpty(messageSendingData.Content))

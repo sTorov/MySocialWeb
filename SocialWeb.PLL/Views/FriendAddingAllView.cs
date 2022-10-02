@@ -24,16 +24,16 @@ namespace SocialWeb.PLL.Views
                 return user;
             }
 
-            var friendRequestData = new FriendRequestData();
+            var friendRequestSendingData = new FriendRequestSendingData();
 
             try
             {
                 user.InputFriendRequests.ToList().ForEach(r =>
                 {
-                    friendRequestData.FriendEmail = r.SenderEmail;
-                    friendRequestData.UserId = user.Id;
+                    friendRequestSendingData.RecipientEmail = r.Email;
+                    friendRequestSendingData.UserId = user.Id;
 
-                    friendService.AddingFriend(friendRequestData);
+                    friendService.AddingFriend(friendRequestSendingData);
                 });
 
                 SuccessMessage.Show("Все заявки приняты!");
