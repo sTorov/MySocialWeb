@@ -2,6 +2,9 @@
 
 namespace SocialWeb.DAL.Repositories
 {
+    /// <summary>
+    /// Репозиторий запросов на добавление в друзья
+    /// </summary>
     public class FriendRequestRepository : BaseRepository, IFriendRequestRepository
     {
         public int Create(FriendRequestEntity friendRequestEntity)
@@ -34,12 +37,30 @@ namespace SocialWeb.DAL.Repositories
         }
     }
 
+    /// <summary>
+    /// Интерфейс репозитория запросов на добавление в друзья
+    /// </summary>
     public interface IFriendRequestRepository
     {
+        /// <summary>
+        /// Создание записи в базе данных.
+        /// </summary>
         int Create(FriendRequestEntity friendRequestEntity);
+        /// <summary>
+        /// Удаление записи из базы данных.
+        /// </summary>
         int Delete(int id);
+        /// <summary>
+        /// Поиск всех записей в базе данных по ID получателя.
+        /// </summary>
         IEnumerable<FriendRequestEntity> FindAllByRequestedUserId(int requestedUserId);
+        /// <summary>
+        /// Поиск всех записей в базе данных по ID пользователя. 
+        /// </summary>
         IEnumerable<FriendRequestEntity> FindAllByUserId(int userId);
+        /// <summary>
+        /// Поиск записи по ID записи.
+        /// </summary>
         FriendRequestEntity FindById(int id);
     }
 }

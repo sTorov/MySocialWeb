@@ -2,6 +2,9 @@
     
 namespace SocialWeb.DAL.Repositories
 {
+    /// <summary>
+    /// Репозиторий сообщений
+    /// </summary>
     public class MessageRepository : BaseRepository, IMessageRepository
     {
         public int Create(MessageEntity messageEntity)
@@ -28,11 +31,26 @@ namespace SocialWeb.DAL.Repositories
         }
     }
 
+    /// <summary>
+    /// Интерфейс репозитория сообщений
+    /// </summary>
     public interface IMessageRepository
     {
+        /// <summary>
+        /// Создание записи в базе данных.
+        /// </summary>
         int Create(MessageEntity messageEntity);
+        /// <summary>
+        /// Поиск всех записей по ID отправителя.
+        /// </summary>
         IEnumerable<MessageEntity> FindBySenderId(int senderId);
+        /// <summary>
+        /// Поиск всех записей по ID получателя.
+        /// </summary>
         IEnumerable<MessageEntity> FindByRecipientId(int recipientId);
+        /// <summary>
+        /// Удаление записи из базы данных по ID записи.
+        /// </summary>
         int DeleteById(int messageId);
     }
 }

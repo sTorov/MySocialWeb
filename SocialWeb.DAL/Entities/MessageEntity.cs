@@ -1,5 +1,8 @@
 ﻿namespace SocialWeb.DAL.Entities
 {
+    /// <summary>
+    /// Сущность сообщения
+    /// </summary>
     public class MessageEntity
     {
         public int id { get; set; }

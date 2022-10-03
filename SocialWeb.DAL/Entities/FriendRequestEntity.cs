@@ -1,5 +1,8 @@
 ﻿namespace SocialWeb.DAL.Entities
 {
+    /// <summary>
+    /// Сущность запроса на добавление в друзья
+    /// </summary>
     public class FriendRequestEntity
     {
         public int id { get; set; }

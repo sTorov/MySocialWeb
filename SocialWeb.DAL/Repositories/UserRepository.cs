@@ -2,6 +2,9 @@
 
 namespace SocialWeb.DAL.Repositories
 {
+    /// <summary>
+    /// Репозиторий пользователей
+    /// </summary>
     public class UserRepository : BaseRepository, IUserRepository
     {
         public int Create(UserEntity userEntity)
@@ -39,13 +42,34 @@ namespace SocialWeb.DAL.Repositories
         }
     }
 
+    /// <summary>
+    /// Интерфейс репозитория пользователей
+    /// </summary>
     public interface IUserRepository
     {
+        /// <summary>
+        /// Создание записи в базе данных.
+        /// </summary>
         int Create(UserEntity userEntity);
+        /// <summary>
+        /// Поиск записи по почтовому адресу.
+        /// </summary>
         UserEntity FindByEmail(string email);
+        /// <summary>
+        /// Получение списка всех пользователей.
+        /// </summary>
         IEnumerable<UserEntity> FindAll();
+        /// <summary>
+        /// Поиск записи по ID записи.
+        /// </summary>
         UserEntity FindById(int id);
+        /// <summary>
+        /// Обновление записи.
+        /// </summary>
         int Update(UserEntity userEntity);
+        /// <summary>
+        /// Удаление записи по ID записи.
+        /// </summary>
         int DeleteById(int id);
     }
 }
