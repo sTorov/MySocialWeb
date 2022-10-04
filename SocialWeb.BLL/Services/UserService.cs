@@ -157,5 +157,33 @@ namespace SocialWeb.BLL.Services
                 outputFriendRequests
                 );
         }
+
+        /// <summary>
+        /// Получение списка всех пользователей
+        /// </summary>
+        public IEnumerable<User> GetAllUsers()
+        {
+            User user;
+            var users = new List<User>();
+
+            userRepository.FindAll().ToList().ForEach(e =>
+            {
+                user = ConstructUserModel(e);
+
+                users.Add(user);
+            });
+
+            return users;
+        }
+
+        /// <summary>
+        /// Удаление пользователя
+        /// </summary>
+        /// <exception cref="Exception"></exception>
+        public void Delete(User user)
+        {
+            if (userRepository.DeleteById(user.Id) == 0)
+                throw new Exception();
+        }
     }
 }
