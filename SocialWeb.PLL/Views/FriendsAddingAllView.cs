@@ -5,12 +5,15 @@ using SocialWeb.PLL.Helpers;
 
 namespace SocialWeb.PLL.Views
 {
-    public class FriendAddingAllView
+    /// <summary>
+    /// Отображение процесса добавления друзей по всем запросам на добавление в друзья
+    /// </summary>
+    public class FriendsAddingAllView
     {
         FriendService friendService;
         UserService userService;
 
-        public FriendAddingAllView(FriendService friendService, UserService userService)
+        public FriendsAddingAllView(FriendService friendService, UserService userService)
         {
             this.friendService = friendService;
             this.userService = userService;

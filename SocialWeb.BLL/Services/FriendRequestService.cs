@@ -22,10 +22,8 @@ namespace SocialWeb.BLL.Services
         }
 
         /// <summary>
-        /// Поиск входящего запроса для текущего пользователя 
+        /// Поиск входящего запроса. 
         /// </summary>
-        /// <param name="friendRequestSendingData"></param>
-        /// <returns></returns>
         /// <exception cref="UserNotFoundException"></exception>
         /// <exception cref="FriendRequestNotFoundException"></exception>
         public FriendRequest FindInputRequest(FriendRequestSendingData friendRequestSendingData)
@@ -41,10 +39,8 @@ namespace SocialWeb.BLL.Services
         }
 
         /// <summary>
-        /// Поиск исходящего запроса для текущего пользователя
+        /// Поиск исходящего запроса.
         /// </summary>
-        /// <param name="friendRequestSendingData"></param>
-        /// <returns></returns>
         /// <exception cref="UserNotFoundException"></exception>
         /// <exception cref="FriendRequestNotFoundException"></exception>
         public FriendRequest FindOutputRequest(FriendRequestSendingData friendRequestSendingData)
@@ -60,9 +56,8 @@ namespace SocialWeb.BLL.Services
         }
 
         /// <summary>
-        /// Отправка запроса
+        /// Отправка запроса.
         /// </summary>
-        /// <param name="friendRequestSendingData"></param>
         /// <exception cref="UserNotFoundException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
@@ -76,10 +71,12 @@ namespace SocialWeb.BLL.Services
             if (friendRequestSendingData.UserId == findUserEntity.id)
                 throw new ArgumentNullException();
 
-            if (friendRequestRepository.FindAllByUserId(friendRequestSendingData.UserId).FirstOrDefault(e => e.requested_user_id == findUserEntity.id) != null)
+            if (friendRequestRepository.FindAllByUserId(friendRequestSendingData.UserId)
+                .FirstOrDefault(e => e.requested_user_id == findUserEntity.id) != null)
                 throw new ArgumentOutOfRangeException();
 
-            if (friendRequestRepository.FindAllByRequestedUserId(friendRequestSendingData.UserId).FirstOrDefault(e => e.user_id == findUserEntity.id) != null)
+            if (friendRequestRepository.FindAllByRequestedUserId(friendRequestSendingData.UserId)
+                .FirstOrDefault(e => e.user_id == findUserEntity.id) != null)
                 throw new ArgumentOutOfRangeException();
 
             if (friendRepository.FindByUserIdAndFriendId(friendRequestSendingData.UserId, findUserEntity.id) != null)
@@ -98,8 +95,6 @@ namespace SocialWeb.BLL.Services
         /// <summary>
         /// Получение всех входящих запросов для текущего пользователя по его ID
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
         public IEnumerable<FriendRequest> FindAllInputRequestByUserId(int userId)
         {
             var friendRequests = new List<FriendRequest>();
@@ -117,8 +112,6 @@ namespace SocialWeb.BLL.Services
         /// <summary>
         /// Получение всех исходящих запросов для текущего пользователя по его ID
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
         public IEnumerable<FriendRequest> FindAllOutputRequestByUserId(int userId)
         {
             var friendRequests = new List<FriendRequest>();
@@ -136,7 +129,6 @@ namespace SocialWeb.BLL.Services
         /// <summary>
         /// Удаление запроса
         /// </summary>
-        /// <param name="id"></param>
         /// <exception cref="FriendRequestNotFoundException"></exception>
         /// <exception cref="Exception"></exception>
         public void DeleteRequest(int id)

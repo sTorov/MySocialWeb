@@ -1,5 +1,8 @@
 ﻿namespace SocialWeb.PLL.Helpers
 {
+    /// <summary>
+    /// Вывод уведомляющего сообщения.
+    /// </summary>
     static class AttentionMessage
     {
         public static void Show(string message)

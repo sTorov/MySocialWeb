@@ -4,6 +4,9 @@ using SocialWeb.PLL.Helpers;
 
 namespace SocialWeb.PLL.Views
 {
+    /// <summary>
+    /// Отображение процесса регистрации пользователя
+    /// </summary>
     public class RegistrationView
     {
         UserService userService;
@@ -39,11 +42,11 @@ namespace SocialWeb.PLL.Views
             }
             catch (ArgumentNullException)
             {
-                AlertMessage.Show("Введите корректное значение.");
+                AlertMessage.Show("Введите корректное значение!");
             }
             catch (Exception)
             {
-                AlertMessage.Show("Произошла ошибка при регистрации.");
+                AlertMessage.Show("Произошла ошибка при регистрации!");
             }
         }
 

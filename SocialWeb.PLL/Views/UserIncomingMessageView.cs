@@ -2,6 +2,9 @@
 
 namespace SocialWeb.PLL.Views
 {
+    /// <summary>
+    /// Отображение входящих сообщений пользователя
+    /// </summary>
     public class UserIncomingMessageView
     {
         public void Show(IEnumerable<Message> incomingMessages)

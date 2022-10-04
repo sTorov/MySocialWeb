@@ -27,7 +27,6 @@ namespace SocialWeb.BLL.Services
         /// <summary>
         /// Регистрация нового пользователя. 
         /// </summary>
-        /// <param name="userRegistrationData"></param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="Exception"></exception>
         public void Register(UserRegistrationData userRegistrationData)
@@ -68,8 +67,6 @@ namespace SocialWeb.BLL.Services
         /// <summary>
         /// Авторизация пользователя.
         /// </summary>
-        /// <param name="userAuthenticationData"></param>
-        /// <returns></returns>
         /// <exception cref="UserNotFoundException"></exception>
         /// <exception cref="WrongPasswordException"></exception>
         public User Authenticate(UserAuthenticationData userAuthenticationData)
@@ -88,8 +85,6 @@ namespace SocialWeb.BLL.Services
         /// <summary>
         /// Поиск пользователя по его почтовому адресу.
         /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
         /// <exception cref="UserNotFoundException"></exception>
         public User FindByEmail(string email)
         {
@@ -102,8 +97,6 @@ namespace SocialWeb.BLL.Services
         /// <summary>
         /// Поиск пользователя по его ID
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         /// <exception cref="UserNotFoundException"></exception>
         public User FindById(int id)
         {
@@ -116,7 +109,6 @@ namespace SocialWeb.BLL.Services
         /// <summary>
         /// Обновление информации пользователя.
         /// </summary>
-        /// <param name="user"></param>
         /// <exception cref="Exception"></exception>
         public void Update(User user)
         {
@@ -139,7 +131,6 @@ namespace SocialWeb.BLL.Services
         /// <summary>
         /// Создание нового объекта пользователя.
         /// </summary>
-        /// <param name="userEntity"></param>
         /// <returns></returns>
         private User ConstructUserModel(UserEntity userEntity)
         {

@@ -5,6 +5,9 @@ using SocialWeb.PLL.Helpers;
 
 namespace SocialWeb.PLL.Views
 {
+    /// <summary>
+    /// Отображение процесса добавления друга по его почтовому адресу
+    /// </summary>
     public class FriendAddingByEmailView
     {
         FriendService friendService;

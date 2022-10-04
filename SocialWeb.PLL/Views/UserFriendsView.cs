@@ -2,7 +2,10 @@
 
 namespace SocialWeb.PLL.Views
 {
-    public class UserFriendView
+    /// <summary>
+    /// Отображение списка друзей пользователя
+    /// </summary>
+    public class UserFriendsView
     {
         public bool Show(IEnumerable<Friend> friends)
         {

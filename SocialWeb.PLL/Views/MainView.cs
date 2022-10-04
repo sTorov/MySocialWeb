@@ -1,5 +1,8 @@
 ﻿namespace SocialWeb.PLL.Views
 {
+    /// <summary>
+    /// Отображение главного меню
+    /// </summary>
     public class MainView
     {
         public void Show()

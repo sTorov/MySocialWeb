@@ -1,15 +1,17 @@
 ﻿using SocialWeb.BLL.Models;
-using SocialWeb.BLL.Services;
 
 namespace SocialWeb.PLL.Views
 {
-    public class FriendMenuView
+    /// <summary>
+    /// Отображение меню действий для списка друзей
+    /// </summary>
+    public class ActionMenuFriendsView
     {
         public User Show(User user)
         {
             while (true)
             {
-                if (!Program.userFriendView.Show(user.Friends))
+                if (!Program.userFriendsView.Show(user.Friends))
                     return user;
 
                 Console.WriteLine("Написать сообщение (нажмите 1)");
@@ -30,7 +32,7 @@ namespace SocialWeb.PLL.Views
                         user = Program.messageSendingView.Show(user);
                         break;
                     case "2":
-                        user = Program.friendDeleteView.Show(user);
+                        user = Program.friendDeletingView.Show(user);
                         break;
                     default:
                         Console.Clear();

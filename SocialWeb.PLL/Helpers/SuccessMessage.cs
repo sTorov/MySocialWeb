@@ -1,5 +1,8 @@
 ﻿namespace SocialWeb.PLL.Helpers
 {
+    /// <summary>
+    /// Вывод сообщения об успешнои выполнениии операции.
+    /// </summary>
     public static class SuccessMessage
     {
         public static void Show(string message)

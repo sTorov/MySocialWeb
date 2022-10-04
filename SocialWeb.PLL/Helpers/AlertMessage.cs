@@ -1,5 +1,8 @@
 ﻿namespace SocialWeb.PLL.Helpers
 {
+    /// <summary>
+    /// Вывод сообщения об ошибке.
+    /// </summary>
     public static class AlertMessage
     {
         public static void Show(string message)

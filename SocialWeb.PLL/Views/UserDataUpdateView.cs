@@ -4,6 +4,9 @@ using SocialWeb.PLL.Helpers;
 
 namespace SocialWeb.PLL.Views
 {
+    /// <summary>
+    /// Отображение процесса обновления песональных данных пользователя
+    /// </summary>
     public class UserDataUpdateView
     {
         UserService userService;

@@ -3,7 +3,10 @@ using SocialWeb.PLL.Helpers;
 
 namespace SocialWeb.PLL.Views
 {
-    public class UserFriendRequestView
+    /// <summary>
+    /// Отображение списков запросов на добавление в друзья
+    /// </summary>
+    public class UserFriendRequestsView
     {
         public bool Show(IEnumerable<FriendRequest> friendRequests)
         {

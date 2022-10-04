@@ -22,10 +22,8 @@ namespace SocialWeb.BLL.Services
         }
 
         /// <summary>
-        /// Получить список всех друзей текущего пользователя по его ID
+        /// Получить список всех друзей текущего пользователя по его ID.
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
         public IEnumerable<Friend> GetAllFriendsByUserId(int userId)
         {
             var friends = new List<Friend>();
@@ -45,7 +43,6 @@ namespace SocialWeb.BLL.Services
         /// У текущего пользователя удаляется информация о искомом пользователе, и<br/>
         /// у искомого пользователя удаляется информация о текущем.
         /// </summary>
-        /// <param name="friendRequestSendingData"></param>
         /// <exception cref="UserNotFoundException"></exception>
         public void DeleteFriend(FriendRequestSendingData friendRequestSendingData)
         {
@@ -59,16 +56,14 @@ namespace SocialWeb.BLL.Services
         /// <summary>
         /// Удаление пользователя из списка друзей.
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="friendId"></param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="Exception"></exception>
         private void Delete(int userId, int friendId)
         {
-            var friendEntityForFriend = friendRepository.FindByUserIdAndFriendId(userId, friendId);
-            if (friendEntityForFriend is null) throw new ArgumentNullException();
+            var findFriendEntity = friendRepository.FindByUserIdAndFriendId(userId, friendId);
+            if (findFriendEntity is null) throw new ArgumentNullException();
 
-            if (friendRepository.Delete(friendEntityForFriend.id) == 0)
+            if (friendRepository.Delete(findFriendEntity.id) == 0)
                 throw new Exception();
         }
 
@@ -77,7 +72,6 @@ namespace SocialWeb.BLL.Services
         /// У текущего пользователя добавляется информация о искомом пользователе, и<br/>
         /// у искомого пользователя добавляется информация о текущем.
         /// </summary>
-        /// <param name="friendRequestSendingData"></param>
         /// <exception cref="UserNotFoundException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="Exception"></exception>
@@ -86,9 +80,9 @@ namespace SocialWeb.BLL.Services
             var findUserEntity = userRepository.FindByEmail(friendRequestSendingData.RecipientEmail);
             if (findUserEntity is null) throw new UserNotFoundException();
 
-            var findFriendRequestEntity = friendRequestRepository.FindAllByRequestedUserId(friendRequestSendingData.UserId)
+            var findFriendRequestEntity = friendRequestRepository
+                .FindAllByRequestedUserId(friendRequestSendingData.UserId)
                 .FirstOrDefault(r => r.user_id == findUserEntity.id);
-
             if (findFriendRequestEntity is null) throw new ArgumentNullException();
 
             if (friendRequestRepository.Delete(findFriendRequestEntity.id) == 0)
@@ -101,8 +95,6 @@ namespace SocialWeb.BLL.Services
         /// <summary>
         /// Добавление пользователя в список друзей.
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="friendId"></param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="Exception"></exception>
         private void Create(int userId, int friendId)

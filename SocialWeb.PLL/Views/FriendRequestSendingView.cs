@@ -5,6 +5,9 @@ using SocialWeb.PLL.Helpers;
 
 namespace SocialWeb.PLL.Views
 {
+    /// <summary>
+    /// Отображение процесса отправки запроса на добавление в друзья
+    /// </summary>
     public class FriendRequestSendingView
     {
         FriendRequestService friendRequestService;

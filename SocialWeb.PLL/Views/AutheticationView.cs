@@ -5,6 +5,9 @@ using SocialWeb.PLL.Helpers;
 
 namespace SocialWeb.PLL.Views
 {
+    /// <summary>
+    /// Показ экрана авторизации
+    /// </summary>
     public class AutheticationView
     {
         UserService userService;

@@ -5,12 +5,15 @@ using SocialWeb.PLL.Helpers;
 
 namespace SocialWeb.PLL.Views
 {
-    public class FriendRequestAbortByEmailView
+    /// <summary>
+    /// Отображение процесса отклонения запроса на добавление в друзья по почтовому адресу отправителя запроса
+    /// </summary>
+    public class FriendRequestRejectingByEmailView
     {
         FriendRequestService friendRequestService;
         UserService userService;
 
-        public FriendRequestAbortByEmailView(FriendRequestService friendRequestService, UserService userService)
+        public FriendRequestRejectingByEmailView(FriendRequestService friendRequestService, UserService userService)
         {
             this.friendRequestService = friendRequestService;
             this.userService = userService;
@@ -27,10 +30,10 @@ namespace SocialWeb.PLL.Views
 
             try
             {
-                var findRequest = friendRequestService.FindOutputRequest(friendRequestSendingData);
+                var findRequest = friendRequestService.FindInputRequest(friendRequestSendingData);
                 friendRequestService.DeleteRequest(findRequest.Id);
 
-                SuccessMessage.Show("Заявка успешно отменена!");
+                SuccessMessage.Show("Заявка успешно отклонена!");
 
                 return userService.FindById(user.Id);
             }
@@ -46,7 +49,7 @@ namespace SocialWeb.PLL.Views
             }
             catch (Exception)
             {
-                AlertMessage.Show("Произошла ошибка при отмене заявки!");
+                AlertMessage.Show("Произошла ошибка при отклонении заявки!");
                 return user;
             }
         }

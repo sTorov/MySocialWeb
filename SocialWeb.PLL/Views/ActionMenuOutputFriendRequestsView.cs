@@ -2,7 +2,10 @@
 
 namespace SocialWeb.PLL.Views
 {
-    public class FriendRequestAbortMenuView
+    /// <summary>
+    /// Отображение меню действий для исходящих запросов на дружбу
+    /// </summary>
+    public class ActionMenuOutputFriendRequestsView
     {
         public User Show(User user)
         {
@@ -10,7 +13,7 @@ namespace SocialWeb.PLL.Views
             {
                 Console.WriteLine("Исходящие заявки\n");
 
-                if (!Program.userFriendRequestView.Show(user.OutputFriendRequests))
+                if (!Program.userFriendRequestsView.Show(user.OutputFriendRequests))
                     return user;
 
                 Console.WriteLine("Отменить все (нажмите 1)");
@@ -28,10 +31,10 @@ namespace SocialWeb.PLL.Views
                 switch (keyValue)
                 {
                     case "1":
-                        user = Program.friendRequestDeletingAllView.Show(user.OutputFriendRequests, user);
+                        user = Program.friendRequestsRejectingAllView.Show(user.OutputFriendRequests, user.Id);
                         break;
                     case "2":
-                        user = Program.friendRequestAbortByEmailView.Show(user);
+                        user = Program.friendRequestAbortingByEmailView.Show(user);
                         break;
                     default:
                         Console.Clear();

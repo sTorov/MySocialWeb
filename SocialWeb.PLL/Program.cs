@@ -22,22 +22,21 @@ namespace SocialWeb
         public static UserOutcomingMessageView userOutcomingMessageView;
 
         public static UserMenuFriendView userMenuFriendView;
-        public static FriendMenuView friendMenuView;
-        public static UserFriendView userFriendView;
-        public static FriendDeleteView friendDeleteView;
+        public static UserFriendsView userFriendsView;
+        public static ActionMenuFriendsView actionMenuFriendsView;
+        public static FriendDeletingView friendDeletingView;
 
-        public static UserMenuFriendRequestView userMenuFriendRequestView;
+        public static UserFriendRequestsView userFriendRequestsView;
         public static FriendRequestSendingView friendRequestSendingView;
-        public static UserFriendRequestView userFriendRequestView;
 
-        public static FriendRequestInputMenuView friendRequestInputMenuView;
+        public static ActionMenuInputFriendRequestsView actionMenuInputFriendRequestsView;
         public static FriendAddingByEmailView friendAddingByEmailView;
-        public static FriendAddingAllView friendAddingAllView;
-        public static FriendRequestDeletingAllView friendRequestDeletingAllView;
-        public static FriendRequestDeletingByEmailView friendRequestDeletingByEmailView;
+        public static FriendsAddingAllView friendsAddingAllView;
+        public static FriendRequestsRejectingAllView friendRequestsRejectingAllView;
+        public static FriendRequestRejectingByEmailView friendRequestRejectingByEmailView;
 
-        public static FriendRequestAbortMenuView friendRequestAbortMenuView;
-        public static FriendRequestAbortByEmailView friendRequestAbortByEmailView;
+        public static ActionMenuOutputFriendRequestsView actionMenuOutputFriendRequestsView;
+        public static FriendRequestAbortingByEmailView friendRequestAbortingByEmailView;
 
         private static void Main(string[] args)
         {
@@ -60,22 +59,21 @@ namespace SocialWeb
             userOutcomingMessageView = new UserOutcomingMessageView();
             
             userMenuFriendView = new UserMenuFriendView();
-            friendMenuView = new FriendMenuView();
-            userFriendView = new UserFriendView();
-            friendDeleteView = new FriendDeleteView(friendService, userService);
+            userFriendsView = new UserFriendsView();
+            actionMenuFriendsView = new ActionMenuFriendsView();
+            friendDeletingView = new FriendDeletingView(friendService, userService);
             
-            userMenuFriendRequestView = new UserMenuFriendRequestView();
-            userFriendRequestView = new UserFriendRequestView();
+            userFriendRequestsView = new UserFriendRequestsView();
             friendRequestSendingView = new FriendRequestSendingView(friendRequestService, userService);
 
-            friendRequestInputMenuView = new FriendRequestInputMenuView();
-            friendAddingAllView = new FriendAddingAllView(friendService, userService);
+            actionMenuInputFriendRequestsView = new ActionMenuInputFriendRequestsView();
+            friendsAddingAllView = new FriendsAddingAllView(friendService, userService);
             friendAddingByEmailView = new FriendAddingByEmailView(friendService, userService);
-            friendRequestDeletingAllView = new FriendRequestDeletingAllView(friendRequestService, userService);
-            friendRequestDeletingByEmailView = new FriendRequestDeletingByEmailView(friendRequestService, userService);
+            friendRequestsRejectingAllView = new FriendRequestsRejectingAllView(friendRequestService, userService);
+            friendRequestRejectingByEmailView = new FriendRequestRejectingByEmailView(friendRequestService, userService);
 
-            friendRequestAbortMenuView = new FriendRequestAbortMenuView();
-            friendRequestAbortByEmailView = new FriendRequestAbortByEmailView(friendRequestService, userService);
+            actionMenuOutputFriendRequestsView = new ActionMenuOutputFriendRequestsView();
+            friendRequestAbortingByEmailView = new FriendRequestAbortingByEmailView(friendRequestService, userService);
 
             while (true)
             {

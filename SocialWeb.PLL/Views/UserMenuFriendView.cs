@@ -3,6 +3,9 @@ using SocialWeb.PLL.Helpers;
 
 namespace SocialWeb.PLL.Views
 {
+    /// <summary>
+    /// Отображение меню друзей для пользователя 
+    /// </summary>
     public class UserMenuFriendView
     {
         public User Show(User user)
@@ -11,32 +14,45 @@ namespace SocialWeb.PLL.Views
             {
                 Console.WriteLine("Просмотреть список друзей (нажмите 1)");
                 Console.WriteLine("Запросить дружбу (нажмите 2)");
-                Console.WriteLine("Обозреватель заявок (нажмите 3)");
-                Console.WriteLine("Назад (нажмите 4)\n");
 
-                if(user.InputFriendRequests.Count() > 0)
-                    AttentionMessage.Show($"Входящие заявки на дружбу: {user.InputFriendRequests.Count()}\n");
+                if (user.InputFriendRequests.Count() > 0)
+                {
+                    Console.Write("Входящие заявки (нажмите 3)   ");
+                    AttentionMessage.Show($"Заявки: {user.InputFriendRequests.Count()}\n");
+                }
+                else
+                    Console.WriteLine("Входящие заявки (нажмите 3)");
+
                 if (user.OutputFriendRequests.Count() > 0)
-                    AttentionMessage.Show($"Исходящие необработанные заявки на дружбу: {user.OutputFriendRequests.Count()}\n");
+                {
+                    Console.Write("Исходящие заявки (нажмите 4)   ");
+                    AttentionMessage.Show($"Заявки: {user.OutputFriendRequests.Count()}\n");
+                }
+                else
+                    Console.WriteLine("Исходящие заявки (нажмите 4)");
 
+                Console.WriteLine("Назад (нажмите 5)\n");
 
                 string keyValue = Console.ReadLine();
 
                 Console.Clear();
 
-                if (keyValue == "4")
+                if (keyValue == "5")
                     break;
 
                 switch (keyValue)
                 {
                     case "1":
-                        user = Program.friendMenuView.Show(user);
+                        user = Program.actionMenuFriendsView.Show(user);
                         break;
                     case "2":
                         user = Program.friendRequestSendingView.Show(user);
                         break;
                     case "3":
-                        user = Program.userMenuFriendRequestView.Show(user);
+                        user = Program.actionMenuInputFriendRequestsView.Show(user);
+                        break;
+                    case "4":
+                        user = Program.actionMenuOutputFriendRequestsView.Show(user);
                         break;
                 }
 

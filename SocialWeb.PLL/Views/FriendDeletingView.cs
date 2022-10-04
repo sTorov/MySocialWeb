@@ -5,12 +5,15 @@ using SocialWeb.PLL.Helpers;
 
 namespace SocialWeb.PLL.Views
 {
-    public class FriendDeleteView
+    /// <summary>
+    /// Отображение процесса удаления пользователя из списка друзей
+    /// </summary>
+    public class FriendDeletingView
     {
         FriendService friendService;
         UserService userService;
 
-        public FriendDeleteView(FriendService friendService, UserService userService)
+        public FriendDeletingView(FriendService friendService, UserService userService)
         {
             this.friendService = friendService;
             this.userService = userService;

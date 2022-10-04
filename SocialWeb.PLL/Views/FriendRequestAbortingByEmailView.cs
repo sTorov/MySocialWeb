@@ -2,41 +2,38 @@
 using SocialWeb.BLL.Models;
 using SocialWeb.BLL.Services;
 using SocialWeb.PLL.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SocialWeb.PLL.Views
 {
-    public class FriendRequestDeletingAllView
+    /// <summary>
+    /// Отображение процесса отмены запроса на добавения в друзья по почтовому адресу получателя запроса
+    /// </summary>
+    public class FriendRequestAbortingByEmailView
     {
         FriendRequestService friendRequestService;
         UserService userService;
 
-        public FriendRequestDeletingAllView(FriendRequestService friendRequestService, UserService userService)
+        public FriendRequestAbortingByEmailView(FriendRequestService friendRequestService, UserService userService)
         {
             this.friendRequestService = friendRequestService;
             this.userService = userService;
         }
 
-        public User Show(IEnumerable<FriendRequest> friendRequests, User user)
+        public User Show(User user)
         {
-            if (friendRequests.Count() == 0)
-            {
-                AlertMessage.Show("Заявки отсутствуют!");
-                return user;
-            }
+            var friendRequestSendingData = new FriendRequestSendingData();
+
+            Console.WriteLine("Введите почтовый адрес:");
+            friendRequestSendingData.RecipientEmail = Console.ReadLine();
+
+            friendRequestSendingData.UserId = user.Id;
 
             try
             {
-                friendRequests.ToList().ForEach(r =>
-                {
-                    friendRequestService.DeleteRequest(r.Id);
-                });
+                var findRequest = friendRequestService.FindOutputRequest(friendRequestSendingData);
+                friendRequestService.DeleteRequest(findRequest.Id);
 
-                SuccessMessage.Show("Процесс завершен успешно!");
+                SuccessMessage.Show("Заявка успешно отменена!");
 
                 return userService.FindById(user.Id);
             }
@@ -55,7 +52,7 @@ namespace SocialWeb.PLL.Views
                 AlertMessage.Show("Произошла ошибка при отмене заявки!");
                 return user;
             }
-
         }
+
     }
 }

@@ -5,6 +5,9 @@ using SocialWeb.PLL.Helpers;
 
 namespace SocialWeb.PLL.Views
 {
+    /// <summary>
+    /// Отображение процесса отправки сообщения
+    /// </summary>
     public class MessageSendingView
     {
         UserService userService;

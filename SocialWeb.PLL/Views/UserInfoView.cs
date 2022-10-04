@@ -2,6 +2,9 @@
 
 namespace SocialWeb.PLL.Views
 {
+    /// <summary>
+    /// Отображение информации о пользователе
+    /// </summary>
     public class UserInfoView
     {
         public void Show(User user)

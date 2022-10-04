@@ -1,13 +1,11 @@
 ﻿using SocialWeb.BLL.Models;
 using SocialWeb.BLL.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SocialWeb.PLL.Views
 {
+    /// <summary>
+    /// Отображение главного меню для авторизированного пользователя
+    /// </summary>
     public class UserMenuView
     {
         UserService userService;
