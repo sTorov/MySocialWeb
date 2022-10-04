@@ -22,13 +22,26 @@ namespace SocialWeb.BLL.Services
         }
 
         /// <summary>
+        /// Конструктор для тестирования
+        /// </summary>
+        public FriendRequestService(
+            IFriendRequestRepository friendRequestRepository,
+            IFriendRepository friendRepository,
+            IUserRepository userRepository)
+        {
+            this.friendRequestRepository = friendRequestRepository;
+            this.friendRepository = friendRepository;
+            this.userRepository = userRepository;
+        }
+
+        /// <summary>
         /// Поиск входящего запроса. 
         /// </summary>
         /// <exception cref="UserNotFoundException"></exception>
         /// <exception cref="FriendRequestNotFoundException"></exception>
         public FriendRequest FindInputRequest(FriendRequestSendingData friendRequestSendingData)
         {
-            var findUserEntity = userRepository.FindByEmail(friendRequestSendingData.RecipientEmail);
+            var findUserEntity = userRepository.FindByEmail(friendRequestSendingData.SearchEmail);
             if (findUserEntity is null) throw new UserNotFoundException();
 
             var findFriendRequest = friendRequestRepository.FindAllByRequestedUserId(friendRequestSendingData.UserId)
@@ -45,7 +58,7 @@ namespace SocialWeb.BLL.Services
         /// <exception cref="FriendRequestNotFoundException"></exception>
         public FriendRequest FindOutputRequest(FriendRequestSendingData friendRequestSendingData)
         {
-            var findUserEntity = userRepository.FindByEmail(friendRequestSendingData.RecipientEmail);
+            var findUserEntity = userRepository.FindByEmail(friendRequestSendingData.SearchEmail);
             if (findUserEntity is null) throw new UserNotFoundException();
 
             var findFriendRequest = friendRequestRepository.FindAllByUserId(friendRequestSendingData.UserId)
@@ -65,7 +78,7 @@ namespace SocialWeb.BLL.Services
         /// <exception cref="Exception"></exception>
         public void SendRequest(FriendRequestSendingData friendRequestSendingData)
         {
-            var findUserEntity = userRepository.FindByEmail(friendRequestSendingData.RecipientEmail);
+            var findUserEntity = userRepository.FindByEmail(friendRequestSendingData.SearchEmail);
             if (findUserEntity is null) throw new UserNotFoundException();
 
             if (friendRequestSendingData.UserId == findUserEntity.id)

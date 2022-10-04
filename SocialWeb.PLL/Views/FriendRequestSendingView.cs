@@ -24,7 +24,7 @@ namespace SocialWeb.PLL.Views
             var friendRequestSendingData = new FriendRequestSendingData();
 
             Console.WriteLine("Для отправки заявки введите почтовый адрес пользователя:");
-            friendRequestSendingData.RecipientEmail = Console.ReadLine();
+            friendRequestSendingData.SearchEmail = Console.ReadLine();
 
             friendRequestSendingData.UserId = user.Id;
 

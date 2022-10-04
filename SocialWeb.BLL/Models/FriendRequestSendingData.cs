@@ -6,6 +6,6 @@
     public class FriendRequestSendingData
     {
         public int UserId { get; set; }
-        public string RecipientEmail { get; set; }
+        public string SearchEmail { get; set; }
     }
 }

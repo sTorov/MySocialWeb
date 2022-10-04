@@ -46,7 +46,7 @@ namespace SocialWeb.BLL.Services
         /// <exception cref="UserNotFoundException"></exception>
         public void DeleteFriend(FriendRequestSendingData friendRequestSendingData)
         {
-            var deletingFriendEntity = userRepository.FindByEmail(friendRequestSendingData.RecipientEmail);
+            var deletingFriendEntity = userRepository.FindByEmail(friendRequestSendingData.SearchEmail);
             if (deletingFriendEntity is null) throw new UserNotFoundException();
 
             Delete(friendRequestSendingData.UserId, deletingFriendEntity.id);
@@ -77,7 +77,7 @@ namespace SocialWeb.BLL.Services
         /// <exception cref="Exception"></exception>
         public void AddingFriend(FriendRequestSendingData friendRequestSendingData)
         {
-            var findUserEntity = userRepository.FindByEmail(friendRequestSendingData.RecipientEmail);
+            var findUserEntity = userRepository.FindByEmail(friendRequestSendingData.SearchEmail);
             if (findUserEntity is null) throw new UserNotFoundException();
 
             var findFriendRequestEntity = friendRequestRepository

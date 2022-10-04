@@ -33,7 +33,7 @@ namespace SocialWeb.PLL.Views
             {
                 user.InputFriendRequests.ToList().ForEach(r =>
                 {
-                    friendRequestSendingData.RecipientEmail = r.Email;
+                    friendRequestSendingData.SearchEmail = r.Email;
                     friendRequestSendingData.UserId = user.Id;
 
                     friendService.AddingFriend(friendRequestSendingData);
